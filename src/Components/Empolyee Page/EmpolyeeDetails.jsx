@@ -44,7 +44,7 @@ function EmployeeDetails() {
           borderBottomStyle="solid"
           borderBottomColor="#000"
         >
-          <Heading marginTop="-50px">
+          <Heading marginTop="30px">
             Employees {"> "}
             <span style={{ fontSize: "30px", color: "grey" }}>
               {empData.name}
