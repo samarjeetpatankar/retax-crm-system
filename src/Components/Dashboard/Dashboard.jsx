@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import { Box, Flex, Grid, SimpleGrid, Spacer, Select, Text } from "@chakra-ui/react";
+import { useEffect, useRef, useState } from "react";
+import { Box, Flex, SimpleGrid, Spacer, Select, Text } from "@chakra-ui/react";
 import DashboardTop from "./DashboardTop";
 import { KeyIndicators } from "./keyIndicators";
 import Chart from "chart.js/auto";
@@ -13,10 +13,11 @@ const keyIndicatorData = [
 
 const Dashboard = () => {
   const chartRef = useRef(null);
+  const [selectedChart, setSelectedChart] = useState("bar");
 
   useEffect(() => {
     const chartConfig = {
-      type: "bar",
+      type: selectedChart,
       data: {
         labels: keyIndicatorData.map((item) => item.name),
         datasets: [
@@ -40,6 +41,8 @@ const Dashboard = () => {
         ],
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
           y: {
             beginAtZero: true,
@@ -68,7 +71,11 @@ const Dashboard = () => {
     return () => {
       chartInstance.destroy();
     };
-  }, []);
+  }, [selectedChart]);
+
+  const handleChartChange = (event) => {
+    setSelectedChart(event.target.value);
+  };
 
   return (
     <Box p={10} bg="white" boxShadow="xl" borderRadius="lg">
@@ -80,11 +87,15 @@ const Dashboard = () => {
             Key Indicators
           </Text>
           <Spacer />
-          <Select w={200} cursor="pointer">
-            <option value="180">6 Months</option>
-            <option value="90">3 Months</option>
-            <option value="30">1 Month</option>
-            <option value="15">15 days</option>
+          <Select
+            w={200}
+            cursor="pointer"
+            value={selectedChart}
+            onChange={handleChartChange}
+          >
+            <option value="bar">Bar Chart</option>
+            <option value="line">Line Chart</option>
+            <option value="pie">Pie Chart</option>
           </Select>
         </Flex>
 
@@ -96,7 +107,10 @@ const Dashboard = () => {
       </Box>
 
       <Box mt={8} bg="white" borderRadius="md" boxShadow="md">
-        <canvas ref={chartRef} style={{ width: "100%", height: "400px" }} />
+        <canvas
+          ref={chartRef}
+          style={{ width: "100%", height: "400px", minHeight: "300px" }}
+        ></canvas>
       </Box>
     </Box>
   );
