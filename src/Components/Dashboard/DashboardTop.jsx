@@ -1,6 +1,6 @@
 import React from "react";
 import { AddIcon } from "@chakra-ui/icons";
-import { Button, Text, ButtonGroup, Box, IconButton, Flex, Spacer, Heading } from "@chakra-ui/react";
+import { Button, ButtonGroup, Box, IconButton, Flex, Spacer, Heading } from "@chakra-ui/react";
 
 const DashboardTop = () => {
   return (
