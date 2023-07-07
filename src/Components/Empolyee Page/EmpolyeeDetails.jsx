@@ -37,7 +37,7 @@ function EmployeeDetails() {
   }, [emp_id]);
 
   return (
-    <div style={{ padding: "30px", margin: "10px", marginLeft: "230px" }}>
+    <div >
       <Box>
         <Flex
           borderBottomWidth="0.5px"
@@ -189,7 +189,7 @@ function EmployeeDetails() {
           </Box>
         </Box>
 
-        <Box className="right" marginLeft="50px" marginTop="-50px">
+        <Box className="right" marginLeft="10px" marginTop="-50px">
           <Tabs>
             <TabList>
               <Tab>Tasks</Tab>

@@ -70,7 +70,7 @@ function Employee() {
   }, []);
 
   return (
-    <Box style={{ margin: "10px", padding: "10px", marginLeft: "200px" }}>
+    <Box style={{ margin: "10px", padding: "10px",  }}>
       <Flex style={{ margin: "30px" }}>
         <Heading>Employees</Heading>
         <Spacer />
@@ -151,6 +151,7 @@ function Employee() {
                   {" "}
                   <input type="checkbox" />
                 </Th>
+                
                 <Th>Name</Th>
                 <Th>Position</Th>
                 <Th>Department</Th>
@@ -180,7 +181,7 @@ function Employee() {
                             style={{
                               width: "30px",
                               height: "30px",
-                              borderRadius: "50px",
+                              borderRadius: "30px",
                             }}
                           />
                         </Link>
