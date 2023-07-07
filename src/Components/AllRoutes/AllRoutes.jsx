@@ -1,6 +1,9 @@
 import {Routes, Route} from 'react-router-dom'
 import Dashboard from "../Dashboard/Dashboard"
 import Help from '../Help/Help'
+import Employee from '../Empolyee Page/Empolyee'
+import EmployeeDetails from '../Empolyee Page/EmpolyeeDetails'
+import AddEmpolyee from '../Empolyee Page/AddEmpolyee'
 
 
 const AllRoutes = () => {
@@ -8,7 +11,9 @@ const AllRoutes = () => {
         <Route path='/' element = {<Dashboard/>}/>
         <Route path='/tasks' element = {<Dashboard/>}/>
         <Route path='/calendar' element = {<Dashboard/>}/>
-        <Route path='/employees' element = {<Dashboard/>}/>
+        <Route path={'/employee'} element={<Employee />} /> 
+        <Route path={'/employee/:emp_id'} element={<EmployeeDetails />} /> 
+        <Route path={'/addempolyee'} element={<AddEmpolyee/>} />
         <Route path='/customers' element = {<Dashboard/>}/>
         <Route path='/cases' element = {<Dashboard/>}/>
         <Route path='/leads' element = {<Dashboard/>}/>

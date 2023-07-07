@@ -33,7 +33,7 @@ const Sidebar = () => {
             <Box>Calendar</Box>
           </HStack>
         </Link>
-        <Link to="/employees">
+        <Link to="/employee">
           <HStack spacing={2} _hover={{ textDecoration: "underline" }}>
             <FaUserFriends size={20} />
             <Box>Employees</Box>
