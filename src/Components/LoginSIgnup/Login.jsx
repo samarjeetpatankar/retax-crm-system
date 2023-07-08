@@ -10,13 +10,13 @@ import LoggedIn from '../AlreadyLoggedIn/LoggedIn';
 
 
 export const Login = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
+  
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const toast = useToast();
-  
   let {isAuth, setIsAuth} = useContext(AuthContext);
 
 
