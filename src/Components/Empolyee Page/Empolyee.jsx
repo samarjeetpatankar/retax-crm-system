@@ -42,8 +42,6 @@ function Employee() {
     setSearchText(event.target.value);
   };
 
-  
-
   const handleButton = (event) => {
     const sortBy = event.target.textContent.toLowerCase();
     if (sortBy === "position") {
@@ -76,8 +74,17 @@ function Employee() {
       });
   }, []);
 
+  useEffect(() => {
+    const filteredList = sort.filter((employee) =>
+      employee.name.toLowerCase().includes(searchText.toLowerCase()) ||
+      employee.phoneNumber.toLowerCase().includes(searchText.toLowerCase()) ||
+      employee.email.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setEmployeeData(filteredList);
+  }, [searchText, sort]);
+
   return (
-    <Box style={{ margin: "10px", padding: "10px",  }}>
+    <Box style={{ margin: "10px", padding: "10px" }}>
       <Flex style={{ margin: "30px" }}>
         <Heading>Employees</Heading>
         <Spacer />
@@ -99,7 +106,11 @@ function Employee() {
         <Box>
           <InputGroup>
             <InputLeftElement children={<SearchIcon />} />
-            <Input onChange={handleSearchChange} placeholder="Search by name, phone or email" />
+            <Input
+              onChange={handleSearchChange}
+              value={searchText}
+              placeholder="Search by name, phone or email"
+            />
           </InputGroup>
         </Box>
         <Box marginLeft="10px" display="flex" columnGap="10px">
@@ -155,10 +166,8 @@ function Employee() {
             <Thead>
               <Tr>
                 <Th>
-                  {" "}
                   <input type="checkbox" />
                 </Th>
-                
                 <Th>Name</Th>
                 <Th>Position</Th>
                 <Th>Department</Th>
@@ -171,11 +180,7 @@ function Employee() {
             <Tbody>
               {employeeData.map((employee) => {
                 return (
-                  <Tr
-                    key={employee.id}
-                    alignItems={"center"}
-                    textAlign={"left"}
-                     >
+                  <Tr key={employee.id} alignItems={"center"} textAlign={"left"}>
                     <Td>
                       <input type="checkbox" />
                     </Td>
@@ -200,11 +205,8 @@ function Employee() {
                         </Link>
                       </Flex>
                     </Td>
-
-                    <Td  fontSize={"14px"}>
-                      {employee.positions}
-                    </Td>
-                    <Td marginLeft={"-100px"}  fontSize={"14px"}>
+                    <Td fontSize={"14px"}>{employee.positions}</Td>
+                    <Td marginLeft={"-100px"} fontSize={"14px"}>
                       {employee.department}
                     </Td>
                     <Td
