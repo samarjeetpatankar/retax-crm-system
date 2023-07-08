@@ -4,6 +4,8 @@ import Help from '../Help/Help'
 import Employee from '../Empolyee Page/Empolyee'
 import EmployeeDetails from '../Empolyee Page/EmpolyeeDetails'
 import AddEmpolyee from '../Empolyee Page/AddEmpolyee'
+import Login from '../LoginSIgnup/Login'
+import SingUp from '../LoginSIgnup/SingUp'
 
 
 const AllRoutes = () => {
@@ -21,6 +23,8 @@ const AllRoutes = () => {
         <Route path='/settings' element = {<Dashboard/>}/>
         <Route path='/help' element = {<Help/>}/>
         <Route path='/logout' element = {<Dashboard/>}/>
+        <Route path='/Login' element = {<Login/>}/>
+        <Route path='/SingUp' element = {<SingUp/>}/>
     </Routes>
 }
 
