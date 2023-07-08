@@ -19,17 +19,17 @@ export const Login = () => {
   
   let {isAuth, setIsAuth} = useContext(AuthContext);
 
-  
+
   const handlePassword = (e) => setPassword(e.target.value);
   
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
-
   const handleClick = () => {
     navigate('/signup');
   };
 
+  
   const handleButtonClick = () => {
     if (email === '') {
       toast({
