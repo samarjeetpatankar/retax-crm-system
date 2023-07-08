@@ -12,38 +12,20 @@ import LoggedIn from '../AlreadyLoggedIn/LoggedIn';
 export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   
-  const [password, setPassword] = useState('');
   let {isAuth, setIsAuth} = useContext(AuthContext);
-  
-  
-    const handleEmail = (e) => setEmail(e.target.value);
-    const handlePassword = (e) => setPassword(e.target.value);
-    
-    const handleTogglePassword = () => {
-      setShowPassword(!showPassword);
-    };
 
-//   const handleClick = () => {
-//     navigate('/signup');
-//   };
-//   if (Username ==="" || Pass ==="" ||!check) {
-//     alert("Invalid Input");
-// }
-// else {
-//     let data = {
-//        Username,Pass
-//     }
-//     signData.push(data);
-//     localStorage.setItem("dataInfo", JSON.stringify(signData));
-//     alert("account created");
-//     navigate("/Login");
-//     // console.log(signData);
-// }
-// }
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleClick = () => {
+    navigate('/signup');
+  };
 
   const handleButtonClick = () => {
     if (email === '') {
@@ -71,7 +53,13 @@ export const Login = () => {
     }
   };
 
-  
+  const handleEmail = (e) => setEmail(e.target.value);
+  const handlePassword = (e) => setPassword(e.target.value);
+
+  const handleCreateButtonClick = () => {
+    navigate('/signup');
+  };
+
   const handleLogin = () => {
     if(email===''||password===''){
       Swal.fire({
@@ -80,14 +68,14 @@ export const Login = () => {
       })
     }
     else{
-      axios
+    axios
       .get('http://localhost:8060/users') 
       .then((response) => {
         const users = response.data;
-        
+
         const matchFound = users.find((user) => user.email === email && user.password === password);
         const partialMatchFound = users.find((user) => user.email === email || user.password === password);
-        
+
         if (matchFound) {
           Swal.fire({
             position: 'center',
@@ -121,17 +109,14 @@ export const Login = () => {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-    }}
-    const handleCreateButtonClick = () => {
-      navigate('/signup');
-    };
-    
-    if(isAuth) {
-      return <LoggedIn/>
-    }
-    
-    return (
-      <Box my="100px">
+  }}
+
+  if(isAuth) {
+    return <LoggedIn/>
+  }
+
+  return (
+    <Box my="100px">
       <Center>
         <Container
           p="20px"
