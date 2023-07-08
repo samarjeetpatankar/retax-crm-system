@@ -21,7 +21,8 @@
     "react-router-dom": "^6.14.1",
     "react-scripts": "5.0.1",
     "redux": "^4.2.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "sweetalert2": "^11.7.10"
   },
   "scripts": {
     "start": "react-scripts start",
