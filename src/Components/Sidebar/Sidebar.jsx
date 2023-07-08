@@ -1,5 +1,6 @@
 import { Box, Heading, Input, Button, Divider, HStack, VStack } from "@chakra-ui/react";
-import { FaTasks, FaCalendar, FaUserFriends, FaUser, FaBriefcase, FaChartBar, FaCommentAlt, FaCog, FaQuestionCircle, FaSignOutAlt } from "react-icons/fa";
+import { FaTasks,  FaCalendar, FaUserFriends, FaUser, FaBriefcase, FaChartBar, FaCommentAlt, FaCog, FaQuestionCircle, FaSignOutAlt } from "react-icons/fa";
+import { RxDashboard } from "react-icons/rx"
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -14,7 +15,7 @@ const Sidebar = () => {
   
 
   const filteredLinks = [
-    { path: '/tasks', label: 'Tasks', icon: FaTasks },
+    { path: '/', label: 'Dashboard', icon: RxDashboard },
     { path: '/calendar', label: 'Calendar', icon: FaCalendar },
     { path: '/employee', label: 'Employees', icon: FaUserFriends },
     { path: '/customers', label: 'Customers', icon: FaUser },

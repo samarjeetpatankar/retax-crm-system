@@ -12,7 +12,6 @@ import Calendar1 from '../Calender/calander'
 const AllRoutes = () => {
     return <Routes>
         <Route path='/' element = {<Dashboard/>}/>
-        <Route path='/tasks' element = {<Dashboard/>}/>
         <Route path='/calendar' element = {<Calendar1/>}/>
         <Route path={'/employee'} element={<Employee />} /> 
         <Route path={'/employee/:emp_id'} element={<EmployeeDetails />} /> 
