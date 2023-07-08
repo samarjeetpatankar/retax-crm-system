@@ -318,6 +318,39 @@
       "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnxfMWicZlX7_MYru1I2rpzYtL9AJxEw7fse4xuClp&s",
       "joinDate": "",
       "id": 29
+    },
+    {
+      "name": "Sagar",
+      "positions": "Marketing Consultant",
+      "department": "Marketing",
+      "status": "Active",
+      "phoneNumber": "1324",
+      "email": "sagar10@gmail.com",
+      "img": "https://www.adeccousa.com/employers/resources/employee-engagement-tips-for-administrative-professionals/~/media/AdeccoGroup/Brands/Adecco%20Global%202016/USA/media/images/employers/resources/articles/employee-engagement-tips-for-administrative-professional.jpg",
+      "joinDate": "",
+      "id": 30
+    },
+    {
+      "name": "Shubham Shashikant Bhargaw",
+      "positions": "Head of marketing",
+      "department": "Marketing",
+      "status": "Active",
+      "phoneNumber": "8980351994",
+      "email": "shubhambhargav10@gmail.com",
+      "img": "https://www.adeccousa.com/employers/resources/employee-engagement-tips-for-administrative-professionals/~/media/AdeccoGroup/Brands/Adecco%20Global%202016/USA/media/images/employers/resources/articles/employee-engagement-tips-for-administrative-professional.jpg",
+      "joinDate": "",
+      "id": 31
+    },
+    {
+      "name": "Shubham Shashikant Bhargaw",
+      "positions": "Marketing Consultant",
+      "department": "Marketing",
+      "status": "Inactive",
+      "phoneNumber": "8980351994",
+      "email": "shubhambhargav10@gmail.com",
+      "img": "https://www.adeccousa.com/employers/resources/employee-engagement-tips-for-administrative-professionals/~/media/AdeccoGroup/Brands/Adecco%20Global%202016/USA/media/images/employers/resources/articles/employee-engagement-tips-for-administrative-professional.jpg",
+      "joinDate": "",
+      "id": 32
     }
   ]
 }

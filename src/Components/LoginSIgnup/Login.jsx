@@ -24,7 +24,6 @@ export const Login = () => {
   };
 
   const handleClick = () => {
-    setIsAuth(true);
     navigate('/signup');
   };
 

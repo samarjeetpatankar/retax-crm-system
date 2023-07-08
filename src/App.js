@@ -5,6 +5,7 @@ import './App.css';
 import Sidebar from './Components/Sidebar/Sidebar';
 import { AllRoutes } from './Components/AllRoutes/AllRoutes';
 import Topbar from './Components/Topbar/Topbar';
+import Footer from './Components/Footer/Footer'
 
 function App() {
   const { isOpen, onToggle } = useDisclosure();
@@ -51,6 +52,7 @@ function App() {
           <AllRoutes />
         </Box>
       </Grid>
+      <Footer/>
     </Box>
   );
 }

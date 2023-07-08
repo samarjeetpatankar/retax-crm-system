@@ -22,7 +22,7 @@ const initialState = {
   joinDate: "",
 };
 
-function Form({ onAddEmployee }) {
+function Form() {
   const [formData, setFormData] = useState(initialState);
   const navigate = useNavigate();
   const toast = useToast();
@@ -37,10 +37,9 @@ function Form({ onAddEmployee }) {
     axios
       .post("http://localhost:3003/employeesListData", formData)
       .then((response) => {
-        onAddEmployee(response.data);
-        setFormData(initialState);
-        navigate("/employee");
+        //setFormData(initialState);
         showToast();
+        navigate('/employee')
       })
       .catch((error) => {
         console.error("Error adding employee:", error);
