@@ -1,67 +1,204 @@
-// import {Link} from 'react-router-dom';
-import { useState } from 'react';
-// import './Style/Login.css'
-
-
+import React, { useState } from "react";
+import { Input, Container, Center, Box, Button, Heading, Radio, RadioGroup, Stack } from '@chakra-ui/react';
+//import { useDispatch, useSelector } from "react-redux";
+//import { addUser } from "../../Redux/Login-Signup/action";
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import './sign.css';
 
- const  SignUp=()=>{
-     const [check,setCheck]=useState(false);
-     let navigate=useNavigate();
-     const [Username,setuser]=useState('');
-     const [Pass,setpass]=useState('');
+export const Signup = () => {
+ // const dispatch = useDispatch();
 
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    gender: '',
+    address: ''
+  });
+  const [userArray, setUserArray] = useState([]);
 
-    let signData = JSON.parse(localStorage.getItem("dataInfo")) || [];
-    const handlesubmit=(e)=>{      
+  const navigate = useNavigate();
 
-    e.preventDefault(); 
+  const handleInputChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setUser((prevUser) => {
+      return { ...prevUser, [name]: value };
+    });
+  };
 
-    if (Username ==="" || Pass ==="" ||!check) {
-        alert("Invalid Input");
+  const handleSignUp = () => {
+    if (
+      user.firstName !== '' &&
+      user.lastName !== '' &&
+      user.email !== '' &&
+      user.password !== '' &&
+      user.confirmPassword !== '' &&
+      user.gender !== ''
+    ) {
+      if (user.password !== user.confirmPassword) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Passwords do not match!',
+          customClass: {
+            confirmButton: 'teal-button',
+          },
+        });
+      } else {
+        fetch('http://localhost:8060/users')
+          .then((res) => res.json())
+          .then((data) => {
+            setUserArray(data);
+            const matchFound = userArray.find((ele)=>{
+                console.log('ele',ele);
+                console.log('userObj',user)
+                console.log('emailUse',user.email)
+            })
+
+            if (matchFound) {
+              Swal.fire({
+                icon: 'warning',
+                title: 'This email already exists',
+              });
+            } else {
+              fetch('http://localhost:8060/users', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user),
+              })
+                .then((response) => {
+                  if (!response.ok) {
+                    throw new Error('Signup request failed');
+                  }
+                  return response.json();
+                })
+                .then((data) => {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Account Created Successfully',
+                  });
+                //   dispatch(addUser(user));
+                  localStorage.setItem('allUsers', JSON.stringify(user));
+                  navigate('/login');
+                })
+                .catch((error) => {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...!',
+                    text: 'Signup request failed',
+                  });
+                  console.error(error);
+                });
+            }
+          });
+      }
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Enter all fields',
+      });
     }
-    else {
-        let data = {
-           Username,Pass
-        }
-        signData.push(data);
-        localStorage.setItem("dataInfo", JSON.stringify(signData));
-        alert("account created");
-        navigate("/Login");
-        console.log(signData);
-    }
-}
-        return( 
-            <div className="text-center m-5-auto" style={{textAlign:'center'}}>
-            <h2>Join us</h2>
-            <h5>Create your personal account</h5>
-            <form  onSubmit={(e)=>handlesubmit(e)} style={{borderRadius: `10px`}}>
-                <p>
-                    <label>Username</label><br/>
-                    <input type="text" name="first_name" onChange={(e)=>setuser(e.target.value)}  />
-                </p>
-                <p>
-                    <label>Email address</label><br/>
-                    <input type="email" name="email" />
-                </p>
-                <p>
-                    <label>Password</label><br/>
-                    <input type="password" name="password" onChange={(e)=>setpass(e.target.value)}  />
-                </p>
-                <p>
-                    <input type="checkbox" name="checkbox" id="checkbox" onChange={(e)=>setCheck(!check)}  /> <span>I agree all statements in <a href="https://google.com" target="_blank" rel="noopener noreferrer">terms of service</a></span>.
-                </p>
-                <p>
-                    <button id="sub_btn" type="submit" style={{borderRadius: `8px`}} >Register</button>
-                </p>
-            </form>
-            <footer>
-                <p style={{color:'blue'}}>Back to Homepage</p>
-            </footer>
-        </div>
-    )
-}
+  };
 
+  //const storeData = useSelector((store) => store);
 
+//   useEffect(() => {
+//     console.log("sd",storeData);
+//   }, [storeData]);
 
-export default SignUp;
+  return (
+    <Box my="100px">
+      <Center>
+        <Container
+          p="20px"
+          h="600px"
+          boxShadow="rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
+        >
+          <Center>
+            <Heading as="h4" size="md" mb={8}>
+              Create Your Account
+            </Heading>
+          </Center>
+          <Input
+            type="text"
+            variant="flushed"
+            name="firstName"
+            placeholder="Enter First Name"
+            mb={4}
+            onChange={handleInputChange}
+          />
+          <Input
+            type="text"
+            variant="flushed"
+            name="lastName"
+            placeholder="Enter Last Name"
+            mb={4}
+            onChange={handleInputChange}
+          />
+          <Input
+            type="email"
+            variant="flushed"
+            name="email"
+            placeholder="Enter Email"
+            mb={4}
+            onChange={handleInputChange}
+          />
+          <Input
+            type="password"
+            variant="flushed"
+            name="password"
+            defaultValue=""
+            placeholder="Create Password"
+            mb={4}
+            onChange={handleInputChange}
+          />
+          <Input
+            type="text"
+            variant="flushed"
+            name="confirmPassword"
+            placeholder="Re-Enter Password"
+            mb={4}
+            onChange={handleInputChange}
+          />
+          <Input
+            type="text"
+            variant="flushed"
+            name="address"
+            placeholder="Enter Address (Optional)"
+            mb={4}
+            onChange={handleInputChange}
+          />
+          <RadioGroup
+            defaultValue=""
+            value={user.gender}
+            onChange={(value) =>
+              setUser((prevUser) => ({ ...prevUser, gender: value }))
+            }
+          >
+            <Stack direction="row" spacing={4}>
+              <Radio value="Male">Male</Radio>
+              <Radio value="Female">Female</Radio>
+              <Radio value="Prefer Not To Say">Prefer Not To Say</Radio>
+            </Stack>
+          </RadioGroup>
+          <Button
+            colorScheme="teal"
+            size="lg"
+            fontWeight="bold"
+            w="full"
+            mt={4}
+            onClick={handleSignUp}
+          >
+            Sign Up
+          </Button>
+        </Container>
+      </Center>
+    </Box>
+  );
+};
