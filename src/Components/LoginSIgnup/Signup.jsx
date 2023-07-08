@@ -7,8 +7,15 @@ import Swal from 'sweetalert2';
 import './sign.css';
 
 export const Signup = () => {
- // const dispatch = useDispatch();
-
+  // const dispatch = useDispatch();
+  
+  const handleInputChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setUser((prevUser) => {
+      return { ...prevUser, [name]: value };
+    });
+  };
   const [user, setUser] = useState({
     firstName: '',
     lastName: '',
@@ -99,18 +106,11 @@ export const Signup = () => {
     }
   };
   
-  const handleInputChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setUser((prevUser) => {
-      return { ...prevUser, [name]: value };
-    });
-  };
-  const storeData = useSelector((store) => store);
+  //const storeData = useSelector((store) => store);
 
-  useEffect(() => {
-    console.log("sd",storeData);
-  }, [storeData]);
+//   useEffect(() => {
+//     console.log("sd",storeData);
+//   }, [storeData]);
 
   return (
     <Box my="100px">
