@@ -63,7 +63,6 @@ import { useNavigate } from 'react-router-dom';
             </footer>
         </div>
     )
-
 }
 
 
