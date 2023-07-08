@@ -52,13 +52,13 @@ export const Login = () => {
       setEmail('');
     }
   };
+  const handleCreateButtonClick = () => {
+    navigate('/signup');
+  };
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
 
-  const handleCreateButtonClick = () => {
-    navigate('/signup');
-  };
 
   const handleLogin = () => {
     if(email===''||password===''){
