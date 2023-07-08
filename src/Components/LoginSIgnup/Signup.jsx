@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Input, Text, Container, Center, Box, Button, Heading, Radio, RadioGroup, Stack } from '@chakra-ui/react';
+import React, { useState } from "react";
+import { Input, Container, Center, Box, Button, Heading, Radio, RadioGroup, Stack } from '@chakra-ui/react';
 //import { useDispatch, useSelector } from "react-redux";
 //import { addUser } from "../../Redux/Login-Signup/action";
 import { useNavigate } from 'react-router-dom';
@@ -49,7 +49,7 @@ export const Signup = () => {
           },
         });
       } else {
-        fetch('http://localhost:8080/users')
+        fetch('http://localhost:8060/users')
           .then((res) => res.json())
           .then((data) => {
             setUserArray(data);
@@ -65,7 +65,7 @@ export const Signup = () => {
                 title: 'This email already exists',
               });
             } else {
-              fetch('http://localhost:8080/users', {
+              fetch('http://localhost:8060/users', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ export const Signup = () => {
         <Container
           p="20px"
           h="600px"
-          boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
+          boxShadow="rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
         >
           <Center>
             <Heading as="h4" size="md" mb={8}>

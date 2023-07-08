@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, Checkbox, Text, Container, Center, Box, Button, Heading, Flex, InputGroup, InputRightElement, StepSeparator } from '@chakra-ui/react';
+import { Input, Checkbox, Text, Container, Center, Box, Button, Heading, Flex, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, useDisclosure, useToast } from '@chakra-ui/react';
 import { FaGoogle, FaTwitter, FaLinkedin, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
@@ -64,7 +64,7 @@ export const Login = () => {
     }
     else{
     axios
-      .get('http://localhost:8080/users') 
+      .get('http://localhost:8060/users') 
       .then((response) => {
         const users = response.data;
 
@@ -79,7 +79,7 @@ export const Login = () => {
             showConfirmButton: false,
             timer: 2000,
           });
-          navigate('/signup');
+          navigate('/');
         } else if (partialMatchFound) {
           Swal.fire({
             icon: 'warning',
@@ -110,7 +110,7 @@ export const Login = () => {
         <Container
           p="20px"
           h="600px"
-          boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
+          boxShadow="rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
         >
           <Center>
             <Heading as="h4" size="md" mb={8}>

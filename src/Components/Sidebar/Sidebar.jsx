@@ -1,5 +1,5 @@
-import { Box, Heading, Input, Button, Divider, HStack, VStack } from "@chakra-ui/react";
-import { FaTasks,  FaCalendar, FaUserFriends, FaUser, FaBriefcase, FaChartBar, FaCommentAlt, FaCog, FaQuestionCircle, FaSignOutAlt } from "react-icons/fa";
+import { Box, Heading, Input,Divider, HStack, VStack } from "@chakra-ui/react";
+import {  FaCalendar, FaUserFriends, FaUser, FaBriefcase, FaChartBar, FaCommentAlt, FaCog, FaQuestionCircle, FaSignOutAlt } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx"
 import { Link } from 'react-router-dom';
 import { useState } from 'react';

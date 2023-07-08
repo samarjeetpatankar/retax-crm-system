@@ -179,6 +179,26 @@
       "gender": "Male",
       "address": "A-204, Sai Shrushti Complex Amli",
       "id": 18
+    },
+    {
+      "firstName": "samarjeet",
+      "lastName": "patankar",
+      "email": "samarjeetpatankar@gmail.com",
+      "password": "123456789",
+      "confirmPassword": "123456789",
+      "gender": "Male",
+      "address": "",
+      "id": 19
+    },
+    {
+      "firstName": "a",
+      "lastName": "a",
+      "email": "s@gmail.com",
+      "password": "123",
+      "confirmPassword": "123",
+      "gender": "Male",
+      "address": "",
+      "id": 20
     }
   ]
 }
