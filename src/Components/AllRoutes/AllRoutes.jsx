@@ -7,8 +7,7 @@ import AddEmpolyee from "../Empolyee Page/AddEmpolyee";
 import Cases from "../Cases/Cases";
 import Settings from "../Settings/Settings";
 import Calendar1 from "../Calender/calander";
-import Login from "../LoginSIgnup/Login";
-import SignUp from "../LoginSIgnup/SingUp";
+
 
 const AllRoutes = () => {
   return (
@@ -25,8 +24,7 @@ const AllRoutes = () => {
       <Route path="/settings" element={<Settings />} />
       <Route path="/help" element={<Help />} />
       <Route path="/logout" element={<Dashboard />} />
-      <Route path="/login" element={ <Login /> } /> 
-      <Route path="/singUp" element={ <SignUp /> } />
+     
     </Routes>
   );
 };
