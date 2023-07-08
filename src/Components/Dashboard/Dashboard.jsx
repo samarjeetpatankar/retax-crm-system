@@ -93,6 +93,7 @@ const Dashboard = () => {
             value={selectedChart}
             onChange={handleChartChange}
           >
+            <option value="bar">Select Chart</option>
             <option value="bar">Bar Chart</option>
             <option value="line">Line Chart</option>
             <option value="pie">Pie Chart</option>

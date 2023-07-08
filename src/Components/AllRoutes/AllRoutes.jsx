@@ -4,6 +4,8 @@ import Help from '../Help/Help'
 import Employee from '../Empolyee Page/Empolyee'
 import EmployeeDetails from '../Empolyee Page/EmpolyeeDetails'
 import AddEmpolyee from '../Empolyee Page/AddEmpolyee'
+import Cases from '../Cases/Cases'
+import Settings from '../Settings/Settings'
 
 
 const AllRoutes = () => {
@@ -15,10 +17,10 @@ const AllRoutes = () => {
         <Route path={'/employee/:emp_id'} element={<EmployeeDetails />} /> 
         <Route path={'/addempolyee'} element={<AddEmpolyee/>} />
         <Route path='/customers' element = {<Dashboard/>}/>
-        <Route path='/cases' element = {<Dashboard/>}/>
+        <Route path='/cases' element = {<Cases/>}/>
         <Route path='/leads' element = {<Dashboard/>}/>
         <Route path='/requests' element = {<Dashboard/>}/>
-        <Route path='/settings' element = {<Dashboard/>}/>
+        <Route path='/settings' element = {<Settings/>}/>
         <Route path='/help' element = {<Help/>}/>
         <Route path='/logout' element = {<Dashboard/>}/>
     </Routes>
