@@ -27,23 +27,23 @@ export const Login = () => {
       setShowPassword(!showPassword);
     };
 
-  const handleClick = () => {
-    navigate('/signup');
-  };
-  if (Username ==="" || Pass ==="" ||!check) {
-    alert("Invalid Input");
-}
-else {
-    let data = {
-       Username,Pass
-    }
-    signData.push(data);
-    localStorage.setItem("dataInfo", JSON.stringify(signData));
-    alert("account created");
-    navigate("/Login");
-    // console.log(signData);
-}
-}
+//   const handleClick = () => {
+//     navigate('/signup');
+//   };
+//   if (Username ==="" || Pass ==="" ||!check) {
+//     alert("Invalid Input");
+// }
+// else {
+//     let data = {
+//        Username,Pass
+//     }
+//     signData.push(data);
+//     localStorage.setItem("dataInfo", JSON.stringify(signData));
+//     alert("account created");
+//     navigate("/Login");
+//     // console.log(signData);
+// }
+// }
 
   const handleButtonClick = () => {
     if (email === '') {

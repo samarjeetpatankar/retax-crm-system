@@ -6,19 +6,16 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
  const  SignUp=()=>{
-    const [Username,setuser]=useState('');
-    const [Pass,setpass]=useState('');
-    const [check,setCheck]=useState(false);
-    let navigate=useNavigate();
+     const [check,setCheck]=useState(false);
+     let navigate=useNavigate();
+     const [Username,setuser]=useState('');
+     const [Pass,setpass]=useState('');
 
 
     let signData = JSON.parse(localStorage.getItem("dataInfo")) || [];
-    const handlesubmit=(e)=>{
-        
+    const handlesubmit=(e)=>{      
 
-    e.preventDefault();
-     
-   
+    e.preventDefault(); 
 
     if (Username ==="" || Pass ==="" ||!check) {
         alert("Invalid Input");
@@ -31,7 +28,7 @@ import { useNavigate } from 'react-router-dom';
         localStorage.setItem("dataInfo", JSON.stringify(signData));
         alert("account created");
         navigate("/Login");
-        // console.log(signData);
+        console.log(signData);
     }
 }
         return( 
