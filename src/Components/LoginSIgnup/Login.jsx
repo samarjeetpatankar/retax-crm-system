@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Input, Checkbox, Text, Container, Center, Box, Button, Heading, Flex, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, useDisclosure, useToast } from '@chakra-ui/react';
 import { FaGoogle, FaTwitter, FaLinkedin, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { AuthContext } from '../Context/AuthContextProvider';
+import LoggedIn from '../AlreadyLoggedIn/LoggedIn';
+
 
 export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,12 +16,15 @@ export const Login = () => {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
+  
+  let {isAuth, setIsAuth} = useContext(AuthContext);
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleClick = () => {
+    setIsAuth(true);
     navigate('/signup');
   };
 
@@ -79,6 +85,8 @@ export const Login = () => {
             showConfirmButton: false,
             timer: 2000,
           });
+          setIsAuth(true)
+          localStorage.setItem('email',email)
           navigate('/');
         } else if (partialMatchFound) {
           Swal.fire({
@@ -103,6 +111,10 @@ export const Login = () => {
         console.error('Error fetching data:', error);
       });
   }}
+
+  if(isAuth) {
+    return <LoggedIn/>
+  }
 
   return (
     <Box my="100px">

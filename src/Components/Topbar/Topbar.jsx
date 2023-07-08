@@ -1,7 +1,8 @@
 import { Box, IconButton, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, Text } from '@chakra-ui/react';
 import { ArrowBackIcon, BellIcon } from '@chakra-ui/icons';
 import { useNavigate, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { AuthContext } from '../Context/AuthContextProvider';
 
 const Topbar = () => {
   const navigate = useNavigate();
@@ -17,6 +18,9 @@ const Topbar = () => {
   const handleCloseNotification = () => {
     setShowNotification(false);
   };
+
+  const {isAuth} = useContext(AuthContext);
+  const myEmail = localStorage.getItem('email');
 
   return (
     <Box
@@ -72,7 +76,7 @@ const Topbar = () => {
                 transition="all 0.3s"
                 _hover={{ bg: "gray.300", cursor: "pointer" }}
               >
-                Sign In
+               {isAuth ? myEmail :'Sign in'}
               </Box>
             </Link>
           )}

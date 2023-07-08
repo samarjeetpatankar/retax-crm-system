@@ -9,25 +9,30 @@ import Settings from "../Settings/Settings";
 import Calendar1 from "../Calender/calander";
 import { Login } from "../LoginSIgnup/Login";
 import { Signup } from "../LoginSIgnup/Signup";
+import { PrivateRoute } from "./PrivateRoute";
+import LoggedIn from "../AlreadyLoggedIn/LoggedIn";
+import { Logout } from "../Logout/Logout";
 
 
 const AllRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Dashboard />} />
-      <Route path="/calendar" element={<Calendar1 />} />
-      <Route path={"/employee"} element={<Employee />} />
+      <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+      <Route path="/calendar" element={<PrivateRoute><Calendar1 /></PrivateRoute>} />
+      <Route path={"/employee"} element={<PrivateRoute><Employee /></PrivateRoute>} />
       <Route path={"/employee/:emp_id"} element={<EmployeeDetails />} />
       <Route path={"/addempolyee"} element={<AddEmpolyee />} />
-      <Route path="/customers" element={<Dashboard />} />
-      <Route path="/cases" element={<Cases />} />
-      <Route path="/leads" element={<Cases />} />
-      <Route path="/requests" element={<Cases />} />
-      <Route path="/settings" element={<Settings />} />
+      <Route path="/customers" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+      <Route path="/cases" element={<PrivateRoute><Cases /></PrivateRoute>} />
+      <Route path="/leads" element={<PrivateRoute><Cases /></PrivateRoute>} />
+      <Route path="/requests" element={<PrivateRoute><Cases /></PrivateRoute>} />
+      <Route path="/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
       <Route path="/help" element={<Help />} />
-      <Route path="/logout" element={<Dashboard />} />
+      <Route path="/logout" element={<PrivateRoute><Logout/></PrivateRoute>} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/loggedin" element={<LoggedIn />} />
+
      
     </Routes>
   );
