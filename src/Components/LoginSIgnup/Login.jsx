@@ -12,23 +12,38 @@ import LoggedIn from '../AlreadyLoggedIn/LoggedIn';
 export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   
+  const [password, setPassword] = useState('');
   let {isAuth, setIsAuth} = useContext(AuthContext);
   
   
     const handleEmail = (e) => setEmail(e.target.value);
     const handlePassword = (e) => setPassword(e.target.value);
-  
+    
+    const handleTogglePassword = () => {
+      setShowPassword(!showPassword);
+    };
+
   const handleClick = () => {
     navigate('/signup');
   };
-  const handleTogglePassword = () => {
-    setShowPassword(!showPassword);
-  };
+  if (Username ==="" || Pass ==="" ||!check) {
+    alert("Invalid Input");
+}
+else {
+    let data = {
+       Username,Pass
+    }
+    signData.push(data);
+    localStorage.setItem("dataInfo", JSON.stringify(signData));
+    alert("account created");
+    navigate("/Login");
+    // console.log(signData);
+}
+}
 
   const handleButtonClick = () => {
     if (email === '') {
