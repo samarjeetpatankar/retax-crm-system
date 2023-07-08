@@ -106,11 +106,11 @@ export const Signup = () => {
       return { ...prevUser, [name]: value };
     });
   };
-  //const storeData = useSelector((store) => store);
+  const storeData = useSelector((store) => store);
 
-//   useEffect(() => {
-//     console.log("sd",storeData);
-//   }, [storeData]);
+  useEffect(() => {
+    console.log("sd",storeData);
+  }, [storeData]);
 
   return (
     <Box my="100px">
