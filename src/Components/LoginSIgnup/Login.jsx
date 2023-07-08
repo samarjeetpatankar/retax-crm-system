@@ -19,6 +19,9 @@ export const Login = () => {
   
   let {isAuth, setIsAuth} = useContext(AuthContext);
 
+  
+  const handlePassword = (e) => setPassword(e.target.value);
+  
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
@@ -54,7 +57,6 @@ export const Login = () => {
   };
 
   const handleEmail = (e) => setEmail(e.target.value);
-  const handlePassword = (e) => setPassword(e.target.value);
 
   const handleCreateButtonClick = () => {
     navigate('/signup');
