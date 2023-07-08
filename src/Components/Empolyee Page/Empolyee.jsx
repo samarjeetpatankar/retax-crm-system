@@ -26,6 +26,7 @@ import { MdOutlineAddCircle } from "react-icons/md";
 function Employee() {
   const [sort, setSort] = useState([]);
   const [employeeData, setEmployeeData] = useState([]);
+  const [searchText, setSearchText] = useState('');
 
   const handleSort = (event) => {
     let status = event.target.value;
@@ -36,6 +37,12 @@ function Employee() {
       setEmployeeData(sortedList);
     }
   };
+
+  const handleSearchChange = (event) => {
+    setSearchText(event.target.value);
+  };
+
+  
 
   const handleButton = (event) => {
     const sortBy = event.target.textContent.toLowerCase();
@@ -92,7 +99,7 @@ function Employee() {
         <Box>
           <InputGroup>
             <InputLeftElement children={<SearchIcon />} />
-            <Input placeholder="Search by name, phone or email" />
+            <Input onChange={handleSearchChange} placeholder="Search by name, phone or email" />
           </InputGroup>
         </Box>
         <Box marginLeft="10px" display="flex" columnGap="10px">
