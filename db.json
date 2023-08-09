@@ -199,6 +199,16 @@
       "gender": "Male",
       "address": "",
       "id": 20
+    },
+    {
+      "firstName": "samarjeet",
+      "lastName": "patankar",
+      "email": "samarjeetpatankar@gmail.com",
+      "password": "123",
+      "confirmPassword": "123",
+      "gender": "Male",
+      "address": "",
+      "id": 21
     }
   ]
 }
