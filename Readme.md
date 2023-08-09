@@ -8,7 +8,7 @@ During this project, I gained hands-on experience in front-end development using
 
 ## Design Inspiration
 
-You can find the design inspiration for this project on Behance at the following link: [Design Link](https://www.behance.net/link-to-design)
+You can find the design inspiration for this project on Behance at the following link: [Design Link](https://www.behance.net/gallery/123446431/Retax-CRM-System?log_shim_removal=1)
 
 Feel free to explore the code and design, and if you have any feedback or questions, please don't hesitate to reach out.
 
@@ -23,6 +23,3 @@ Feel free to explore the code and design, and if you have any feedback or questi
 
 Contributions are welcome! If you find any issues or have ideas for improvements, please open an issue or submit a pull request.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
