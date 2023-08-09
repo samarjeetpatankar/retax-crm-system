@@ -10,24 +10,26 @@ import LoggedIn from '../AlreadyLoggedIn/LoggedIn';
 
 
 export const Login = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
+  
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const toast = useToast();
-  
   let {isAuth, setIsAuth} = useContext(AuthContext);
 
+
+  const handlePassword = (e) => setPassword(e.target.value);
+  
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
-
   const handleClick = () => {
-    setIsAuth(true);
     navigate('/signup');
   };
 
+  
   const handleButtonClick = () => {
     if (email === '') {
       toast({
@@ -55,7 +57,6 @@ export const Login = () => {
   };
 
   const handleEmail = (e) => setEmail(e.target.value);
-  const handlePassword = (e) => setPassword(e.target.value);
 
   const handleCreateButtonClick = () => {
     navigate('/signup');

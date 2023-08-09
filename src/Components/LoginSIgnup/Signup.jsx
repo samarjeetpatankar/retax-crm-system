@@ -7,8 +7,15 @@ import Swal from 'sweetalert2';
 import './sign.css';
 
 export const Signup = () => {
- // const dispatch = useDispatch();
-
+  // const dispatch = useDispatch();
+  
+  const handleInputChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setUser((prevUser) => {
+      return { ...prevUser, [name]: value };
+    });
+  };
   const [user, setUser] = useState({
     firstName: '',
     lastName: '',
@@ -22,14 +29,7 @@ export const Signup = () => {
 
   const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setUser((prevUser) => {
-      return { ...prevUser, [name]: value };
-    });
-  };
-
+  
   const handleSignUp = () => {
     if (
       user.firstName !== '' &&
@@ -38,27 +38,27 @@ export const Signup = () => {
       user.password !== '' &&
       user.confirmPassword !== '' &&
       user.gender !== ''
-    ) {
-      if (user.password !== user.confirmPassword) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Passwords do not match!',
-          customClass: {
-            confirmButton: 'teal-button',
-          },
-        });
-      } else {
-        fetch('http://localhost:8060/users')
+      ) {
+        if (user.password !== user.confirmPassword) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Passwords do not match!',
+            customClass: {
+              confirmButton: 'teal-button',
+            },
+          });
+        } else {
+          fetch('http://localhost:8060/users')
           .then((res) => res.json())
           .then((data) => {
             setUserArray(data);
             const matchFound = userArray.find((ele)=>{
-                console.log('ele',ele);
-                console.log('userObj',user)
-                console.log('emailUse',user.email)
+              console.log('ele',ele);
+              console.log('userObj',user)
+              console.log('emailUse',user.email)
             })
-
+            
             if (matchFound) {
               Swal.fire({
                 icon: 'warning',
@@ -83,7 +83,7 @@ export const Signup = () => {
                     icon: 'success',
                     title: 'Account Created Successfully',
                   });
-                //   dispatch(addUser(user));
+                  //   dispatch(addUser(user));
                   localStorage.setItem('allUsers', JSON.stringify(user));
                   navigate('/login');
                 })
@@ -95,7 +95,7 @@ export const Signup = () => {
                   });
                   console.error(error);
                 });
-            }
+              }
           });
       }
     } else {
@@ -105,7 +105,7 @@ export const Signup = () => {
       });
     }
   };
-
+  
   //const storeData = useSelector((store) => store);
 
 //   useEffect(() => {
