@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-// const connection = require("./config");
+const connection = require("./db/config");
 require("dotenv").config();
 
 const app = express();
@@ -17,14 +17,14 @@ app.listen(port, () => {
   console.log(`Server running on port http://localhost:${port}`);
 });
 
-// async function connectToDatabase() {
-//     try {
-//       await connection;
-//       console.log("database connected successfully");
-//     } catch (error) {
-//       console.log("error connecting to the database");
-//       console.log(error);
-//     }
-//   }
+async function connectToDatabase() {
+  try {
+    await connection;
+    console.log("database connected successfully");
+  } catch (error) {
+    console.log("error connecting to the database");
+    console.log(error);
+  }
+}
 
-//   connectToDatabase()
+connectToDatabase();
