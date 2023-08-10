@@ -22,7 +22,7 @@ router.post("/create", async (req, res) => {
     res.status(500).json({ message: "Error creating employee" });
   }
 });
-
+ 
 // Get all employees
 router.get("/all", async (req, res) => {
   try {
