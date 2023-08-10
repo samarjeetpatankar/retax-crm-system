@@ -3,6 +3,7 @@ const cors = require("cors");
 const connection = require("./db/config");
 require("dotenv").config();
 const authRoute = require("./routes/authRoutes")
+const empolyeeRoute = require("./routes/empolyeeRoute")
 
 const app = express();
 app.use(cors());
@@ -12,7 +13,8 @@ app.get("/", (req, res) => {
   res.send("base route"); 
 });
 
-app.use('/auth', authRoute);
+app.use('/', authRoute);
+app.use("/", empolyeeRoute);
 
 const port = 8199; 
 
