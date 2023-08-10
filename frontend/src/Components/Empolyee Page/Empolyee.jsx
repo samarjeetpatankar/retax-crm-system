@@ -46,7 +46,7 @@ function Employee() {
     const sortBy = event.target.textContent.toLowerCase();
     if (sortBy === "position") {
       const sortedList = [...employeeData].sort((a, b) =>
-        a.positions.localeCompare(b.positions)
+        a.position.localeCompare(b.position)
       );
       setEmployeeData(sortedList);
     } else if (sortBy === "department") {
@@ -77,9 +77,14 @@ function Employee() {
   useEffect(() => {
     const filteredList = sort.filter(
       (employee) =>
-        employee.name.toLowerCase().includes(searchText.toLowerCase()) ||
-        employee.phoneNumber.toLowerCase().includes(searchText.toLowerCase()) ||
-        employee.email.toLowerCase().includes(searchText.toLowerCase())
+        (employee.name &&
+          employee.name.toLowerCase().includes(searchText.toLowerCase())) ||
+        (employee.phoneNumber &&
+          employee.phoneNumber
+            .toLowerCase()
+            .includes(searchText.toLowerCase())) ||
+        (employee.email &&
+          employee.email.toLowerCase().includes(searchText.toLowerCase()))
     );
     setEmployeeData(filteredList);
   }, [searchText, sort]);
@@ -162,92 +167,93 @@ function Employee() {
       <br />
 
       <Box className="showData">
-  <TableContainer>
-    <Table variant="simple">
-      <Thead>
-        <Tr>
-          <Th>
-            <input type="checkbox" />
-          </Th>
-          <Th>Image</Th>
-          <Th>Name</Th>
-          <Th>Position</Th>
-          <Th>Department</Th>
-          <Th>Status</Th>
-          <Th>Phone no</Th>
-          <Th>Email</Th>
-        </Tr>
-      </Thead>
+        <TableContainer>
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th>
+                  <input type="checkbox" />
+                </Th>
+                <Th>Image</Th>
+                <Th>Name</Th>
+                <Th>Position</Th>
+                <Th>Department</Th>
+                <Th>Status</Th>
+                <Th>Phone no</Th>
+                <Th>Email</Th>
+              </Tr>
+            </Thead>
 
-      <Tbody>
-        {employeeData.map((employee) => {
-          return (
-            <Tr key={employee._id} alignItems={"center"} textAlign={"left"}>
-              <Td>
-                <input type="checkbox" />
-              </Td>
-              <Td>
-                
-                <Flex style={{ alignItems: "center" }}>
-                <Link to={`/employee/${employee._id}`}>
-                    <img
-                      src={employee.imageLink}
-                      alt="profile img"
-                      style={{
-                        width: "30px",
-                        height: "30px",
-                        borderRadius: "30px",
-                      }}
-                    />
-                  </Link>
-                </Flex>
-              </Td>
-              <Td>
-                <Flex style={{ alignItems: "center" }}>
-                  <Link
-                    to={`/employee/${employee._id}`}
-                    style={{ fontSize: "14px" }}
+            <Tbody>
+              {employeeData.map((employee) => {
+                return (
+                  <Tr
+                    key={employee._id}
+                    alignItems={"center"}
+                    textAlign={"left"}
                   >
-                    {employee.name}
-                  </Link>
-                </Flex>
-              </Td>
-              <Td fontSize={"14px"}>{employee.position}</Td>
-              <Td fontSize={"14px"}>{employee.department}</Td>
-              <Td
-                style={{
-                  color:
-                    employee.status === "Active"
-                      ? "green"
-                      : employee.status === "In a Meeting"
-                      ? "blue"
-                      : employee.status === "On Sick Leave"
-                      ? "orange"
-                      : "inherit",
-                }}
-              >
-                {employee.status}
-              </Td>
-              <Td fontSize={"14px"}>{employee.phoneNo}</Td>
-              <Td fontSize={"14px"} textAlign="center">
-              <Link to={`/employee/${employee._id}`}
-                  style={{ marginLeft: "-50px" , textAlign:"left" }}
-                >
-                  {employee.email}
-                </Link>
-              </Td>
-            </Tr>
-          );
-        })}
-      </Tbody>
-    </Table>
-  </TableContainer>
-</Box>
-
+                    <Td>
+                      <input type="checkbox" />
+                    </Td>
+                    <Td>
+                      <Flex style={{ alignItems: "center" }}>
+                        <Link to={`/employee/${employee._id}`}>
+                          <img
+                            src={employee.imageLink}
+                            alt="profile img"
+                            style={{
+                              width: "30px",
+                              height: "30px",
+                              borderRadius: "30px",
+                            }}
+                          />
+                        </Link>
+                      </Flex>
+                    </Td>
+                    <Td>
+                      <Flex style={{ alignItems: "center" }}>
+                        <Link
+                          to={`/employee/${employee._id}`}
+                          style={{ fontSize: "14px" }}
+                        >
+                          {employee.name}
+                        </Link>
+                      </Flex>
+                    </Td>
+                    <Td fontSize={"14px"}>{employee.position}</Td>
+                    <Td fontSize={"14px"}>{employee.department}</Td>
+                    <Td
+                      style={{
+                        color:
+                          employee.status === "Active"
+                            ? "green"
+                            : employee.status === "In a Meeting"
+                            ? "blue"
+                            : employee.status === "On Sick Leave"
+                            ? "orange"
+                            : "inherit",
+                      }}
+                    >
+                      {employee.status}
+                    </Td>
+                    <Td fontSize={"14px"}>{employee.phoneNo}</Td>
+                    <Td fontSize={"14px"} textAlign="center">
+                      <Link
+                        to={`/employee/${employee._id}`}
+                        style={{ marginLeft: "-50px", textAlign: "left" }}
+                      >
+                        {employee.email}
+                      </Link>
+                    </Td>
+                  </Tr>
+                );
+              })}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </Box>
     </Box>
   );
 }
 
 export default Employee;
-
-
