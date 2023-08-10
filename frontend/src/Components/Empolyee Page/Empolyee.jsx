@@ -27,6 +27,7 @@ function Employee() {
   const [sort, setSort] = useState([]);
   const [employeeData, setEmployeeData] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [userRole, setUserRole] = useState("");
 
   const handleSort = (event) => {
     let status = event.target.value;
@@ -63,6 +64,9 @@ function Employee() {
   };
 
   useEffect(() => {
+    const fetchedUserRole = "admin";
+    setUserRole(fetchedUserRole);
+    
     axios
       .get("http://localhost:8199/all")
       .then((response) => {
@@ -73,6 +77,8 @@ function Employee() {
         console.log(error);
       });
   }, []);
+
+  console.log("User Role:", userRole) ;
 
   useEffect(() => {
     const filteredList = sort.filter(
@@ -94,18 +100,21 @@ function Employee() {
       <Flex style={{ margin: "30px" }}>
         <Heading>Employees</Heading>
         <Spacer />
-        <Button
-          as={Link}
-          to="/addempolyee"
-          colorScheme="purple"
-          size="md"
-          variant="outline"
-        >
-          <Box style={{ margin: "5px" }}>
-            <MdOutlineAddCircle />
-          </Box>
-          Add An Employee
-        </Button>
+        
+        {userRole === "admin" && (
+          <Button
+            as={Link}
+            to="/addempolyee"
+            colorScheme="purple"
+            size="md"
+            variant="outline"
+          >
+            <Box style={{ margin: "5px" }}>
+              <MdOutlineAddCircle />
+            </Box>
+            Add An Employee
+          </Button>
+        )}
       </Flex>
 
       <Flex className="sort">
@@ -182,7 +191,7 @@ function Employee() {
                 <Th>Phone no</Th>
                 <Th>Email</Th>
               </Tr>
-            </Thead> 
+            </Thead>
 
             <Tbody>
               {employeeData.map((employee) => {

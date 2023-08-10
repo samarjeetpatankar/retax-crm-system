@@ -1,10 +1,17 @@
-import React from 'react';
-import { Box, Container, Stack, Text, Link, IconButton } from '@chakra-ui/react';
-import { FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa';
+import React from "react";
+import {
+  Box,
+  Container,
+  Stack,
+  Text,
+  Link,
+  IconButton,
+} from "@chakra-ui/react";
+import { FaTwitter, FaYoutube, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <Box bg="teal.500" color="white" py={8}>
+    <Box bg="rgba(0, 0, 0, 0.04)" color="black" py={8}  >
       <Container maxW="container.xl">
         <Stack direction="row" spacing={4} justify="center" mb={4}>
           <IconButton

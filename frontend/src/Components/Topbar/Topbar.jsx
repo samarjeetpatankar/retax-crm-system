@@ -1,16 +1,29 @@
-import { Box, IconButton, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, Text } from '@chakra-ui/react';
-import { ArrowBackIcon, BellIcon } from '@chakra-ui/icons';
-import { useNavigate, Link } from 'react-router-dom';
-import { useState, useContext } from 'react';
-import { AuthContext } from '../Context/AuthContextProvider';
+import React, { useState } from "react";
+import {
+  Box,
+  IconButton,
+ 
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  Button,
+  Text,
+} from "@chakra-ui/react";
+import { ArrowBackIcon, BellIcon } from "@chakra-ui/icons";
+import { useNavigate, Link } from "react-router-dom";
 
 const Topbar = () => {
   const navigate = useNavigate();
-  const isLoggedIn = false;
-  const handleGoBack = () => {
-    navigate(-1); 
-  };
   const [showNotification, setShowNotification] = useState(false);
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   const handleNotificationClick = () => {
     setShowNotification(true);
   };
@@ -19,9 +32,6 @@ const Topbar = () => {
     setShowNotification(false);
   };
 
-  const {isAuth} = useContext(AuthContext);
-  const myEmail = localStorage.getItem('email');
-
   return (
     <Box
       display="flex"
@@ -29,7 +39,7 @@ const Topbar = () => {
       justifyContent="space-between"
       p={4}
       bg="gray.100"
-      height={30}
+      height={50}
       borderRadius={20}
     >
       <Box>
@@ -56,30 +66,21 @@ const Topbar = () => {
           overflow="hidden"
           bg="white"
         >
-          {isLoggedIn ? (
-            <Image
-              src="/path-to-user-image.jpg"
-              alt="Profile Image"
-              boxSize="full"
-              objectFit="cover"
-            />
-          ) : (
-            <Link to="/login">
-              <Box
-                p={1}
-                textAlign="center"
-                bg="gray.200"
-                color="gray.600"
-                fontSize="sm"
-                fontWeight="semibold"
-                textTransform="uppercase"
-                transition="all 0.3s"
-                _hover={{ bg: "gray.300", cursor: "pointer" }}
-              >
-               {isAuth ? myEmail :'Sign in'}
-              </Box>
-            </Link>
-          )}
+          <Link to="/login">
+            <Box
+              p={1}
+              textAlign="center"
+              bg="gray.200"
+              color="gray.600"
+              fontSize="sm"
+              fontWeight="semibold"
+              textTransform="uppercase"
+              transition="all 0.3s"
+              _hover={{ bg: "gray.300", cursor: "pointer" }}
+            >
+              Sign in
+            </Box>
+          </Link>
         </Box>
       </Box>
       <Modal isOpen={showNotification} onClose={handleCloseNotification}>

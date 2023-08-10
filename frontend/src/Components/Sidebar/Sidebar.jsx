@@ -39,11 +39,11 @@ const Sidebar = () => {
       flexDirection="column"
       p={4}
       borderRadius="md"
-      boxShadow="md"
+     
       height="100%"
       width="250px"
-      bgGradient="linear(to-r, teal.300, teal.600)"
-      color="white"
+      bg="rgba(0, 0, 0, 0.04)"
+      color="black"
     >
       <Heading as="h3" size="lg" mb={4} textAlign="center">
         Retax
