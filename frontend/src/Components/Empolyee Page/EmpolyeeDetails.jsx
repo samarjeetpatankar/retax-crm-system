@@ -178,9 +178,14 @@ function EmployeeDetails() {
                 leftIcon={<AiOutlineMail style={{ color: "black" }} />}
                 pr={2}
               >
-                <Text ml={2} color={"black"}>
-                  Send to {empData.name}
-                </Text>
+                <a
+                  href={`mailto:${empData.email}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <Text ml={2}>Send to {empData.email}</Text>
+                </a>
               </Button>
             </div>
             <Box mt={"23px"}>
@@ -256,106 +261,6 @@ function EmployeeDetails() {
                         <Text fontSize={"12px"}>8-jun-2021</Text>
                       </Box>
                     </Box>
-
-                    <Box
-                      mt={"20px"}
-                      p={"10px"}
-                      boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-                    >
-                      <Box display="flex">
-                        <Text
-                          fontSize={"14px"}
-                          justifyContent={"space-between"}
-                        >
-                          Update Dcouments in Customer profile
-                        </Text>
-                        <FiMoreHorizontal />
-                      </Box>
-                      <Box>
-                        <Text fontSize={"14px"}>Deadline : 23-Jun-2021</Text>
-                      </Box>
-                      <Box
-                        mt={"10px"}
-                        display={"flex"}
-                        justifyContent={"space-between"}
-                      >
-                        <Box display={"flex"}>
-                          <Image
-                            width="45px"
-                            borderRadius="10px"
-                            src="https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-755-1-1024x683.jpg"
-                            alt="img"
-                          />
-                          <Text fontSize={"12px"}>ID000111</Text>
-                        </Box>
-
-                        <Text fontSize={"12px"}>09-jun-2021</Text>
-                      </Box>
-                    </Box>
-
-                    <Box
-                      mt={"20px"}
-                      p={"10px"}
-                      boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-                    >
-                      <Box display="flex" justifyContent={"space-between"}>
-                        <Text fontSize={"14px"}>Call to Customer</Text>
-                        <FiMoreHorizontal />
-                      </Box>
-                      <Box>
-                        <Text fontSize={"14px"}>Deadline : 27-Jun-2021</Text>
-                      </Box>
-                      <Box
-                        mt={"23px"}
-                        display={"flex"}
-                        justifyContent={"space-between"}
-                      >
-                        <Box display={"flex"}>
-                          <Image
-                            width="45px"
-                            borderRadius="10px"
-                            src="https://media.gettyimages.com/id/155442005/photo/moustache-man.jpg?s=612x612&w=gi&k=20&c=2D51xsdb2y64t17NOJnCbW_eGcHx9-Nz10Hl-WQZJg8="
-                            alt="img"
-                          />
-                          <Text fontSize={"12px"}>ID000111</Text>
-                        </Box>
-
-                        <Text fontSize={"12px"}>10-jun-2021</Text>
-                      </Box>
-                    </Box>
-
-                    <Box
-                      mt={"20px"}
-                      p={"10px"}
-                      boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-                    >
-                      <Box display="flex">
-                        <Text fontSize={"14px"}>
-                          Send lead documents for inceptions
-                        </Text>
-                        <FiMoreHorizontal />
-                      </Box>
-                      <Box>
-                        <Text fontSize={"14px"}>Deadline : 01-Jun-2021</Text>
-                      </Box>
-                      <Box
-                        mt={"10px"}
-                        display={"flex"}
-                        justifyContent={"space-between"}
-                      >
-                        <Box display={"flex"}>
-                          <Image
-                            width="45px"
-                            borderRadius="10px"
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnxfMWicZlX7_MYru1I2rpzYtL9AJxEw7fse4xuClp&s"
-                            alt="img"
-                          />
-                          <Text fontSize={"12px"}>ID000221</Text>
-                        </Box>
-
-                        <Text fontSize={"12px"}>8-jun-2021</Text>
-                      </Box>
-                    </Box>
                   </Box>
 
                   <Box
@@ -376,102 +281,6 @@ function EmployeeDetails() {
                       </Text>
                       <IoMdAdd />
                     </Box>
-                    <Box
-                      mt={"20px"}
-                      p={"10px"}
-                      boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-                    >
-                      <Box display="flex" justifyContent={"space-between"}>
-                        <Text fontSize={"14px"}>Call to Customer</Text>
-                        <FiMoreHorizontal />
-                      </Box>
-                      <Box>
-                        <Text fontSize={"14px"}>Deadline : 19-Jun-2021</Text>
-                      </Box>
-                      <Box
-                        mt={"10px"}
-                        display={"flex"}
-                        justifyContent={"space-between"}
-                      >
-                        <Box display={"flex"}>
-                          <Image
-                            width="45px"
-                            borderRadius="10px"
-                            src="https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-791-1-1024x683.jpg"
-                            alt="img"
-                          />
-                          <Text fontSize={"12px"}>ID000111</Text>
-                        </Box>
-
-                        <Text fontSize={"12px"}>9-jun-2021</Text>
-                      </Box>
-                    </Box>
-
-                    <Box
-                      mt={"20px"}
-                      p={"10px"}
-                      boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-                    >
-                      <Box display="flex">
-                        <Text fontSize={"14px"}>
-                          Send lead documents for inceptions
-                        </Text>
-                        <FiMoreHorizontal />
-                      </Box>
-                      <Box>
-                        <Text fontSize={"14px"}>Deadline : 22-Jun-2021</Text>
-                      </Box>
-                      <Box
-                        mt={"10px"}
-                        display={"flex"}
-                        justifyContent={"space-between"}
-                      >
-                        <Box display={"flex"}>
-                          <Image
-                            width="45px"
-                            borderRadius="10px"
-                            src="https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-1210-1024x683.jpg"
-                            alt="img"
-                          />
-                          <Text fontSize={"12px"}>ID000221</Text>
-                        </Box>
-
-                        <Text fontSize={"12px"}>8-jun-2021</Text>
-                      </Box>
-                    </Box>
-
-                    <Box
-                      mt={"20px"}
-                      p={"10px"}
-                      boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-                    >
-                      <Box display="flex">
-                        <Text fontSize={"14px"}>
-                          Send lead documents for inceptions
-                        </Text>
-                        <FiMoreHorizontal />
-                      </Box>
-                      <Box>
-                        <Text fontSize={"14px"}>Deadline : 22-Jun-2021</Text>
-                      </Box>
-                      <Box
-                        mt={"10px"}
-                        display={"flex"}
-                        justifyContent={"space-between"}
-                      >
-                        <Box display={"flex"}>
-                          <Image
-                            width="45px"
-                            borderRadius="10px"
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnxfMWicZlX7_MYru1I2rpzYtL9AJxEw7fse4xuClp&s"
-                            alt="img"
-                          />
-                          <Text fontSize={"12px"}>ID000221</Text>
-                        </Box>
-
-                        <Text fontSize={"12px"}>8-jun-2021</Text>
-                      </Box>
-                    </Box>
                   </Box>
 
                   <Box
@@ -491,102 +300,6 @@ function EmployeeDetails() {
                         Completed
                       </Text>
                       <IoMdAdd />
-                    </Box>
-                    <Box
-                      mt={"20px"}
-                      p={"10px"}
-                      boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-                    >
-                      <Box display="flex" justifyContent={"space-between"}>
-                        <Text fontSize={"14px"}>Call to Customer</Text>
-                        <FiMoreHorizontal />
-                      </Box>
-                      <Box>
-                        <Text fontSize={"14px"}>Deadline : 17-Jun-2021</Text>
-                      </Box>
-                      <Box
-                        mt={"10px"}
-                        display={"flex"}
-                        justifyContent={"space-between"}
-                      >
-                        <Box display={"flex"}>
-                          <Image
-                            width="45px"
-                            borderRadius="10px"
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnxfMWicZlX7_MYru1I2rpzYtL9AJxEw7fse4xuClp&s"
-                            alt="img"
-                          />
-                          <Text fontSize={"12px"}>ID000228</Text>
-                        </Box>
-
-                        <Text fontSize={"12px"}>7-jun-2021</Text>
-                      </Box>
-                    </Box>
-
-                    <Box
-                      mt={"20px"}
-                      p={"10px"}
-                      boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-                    >
-                      <Box display="flex">
-                        <Text fontSize={"14px"}>
-                          Send lead documents for inceptions
-                        </Text>
-                        <FiMoreHorizontal />
-                      </Box>
-                      <Box>
-                        <Text fontSize={"14px"}>Deadline : 22-Jun-2021</Text>
-                      </Box>
-                      <Box
-                        mt={"10px"}
-                        display={"flex"}
-                        justifyContent={"space-between"}
-                      >
-                        <Box display={"flex"}>
-                          <Image
-                            width="45px"
-                            borderRadius="10px"
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnxfMWicZlX7_MYru1I2rpzYtL9AJxEw7fse4xuClp&s"
-                            alt="img"
-                          />
-                          <Text fontSize={"12px"}>ID000221</Text>
-                        </Box>
-
-                        <Text fontSize={"12px"}>8-jun-2021</Text>
-                      </Box>
-                    </Box>
-
-                    <Box
-                      mt={"20px"}
-                      p={"10px"}
-                      boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-                    >
-                      <Box display="flex">
-                        <Text fontSize={"14px"}>
-                          Send lead documents for inceptions
-                        </Text>
-                        <FiMoreHorizontal />
-                      </Box>
-                      <Box>
-                        <Text fontSize={"14px"}>Deadline : 22-Jun-2021</Text>
-                      </Box>
-                      <Box
-                        mt={"10px"}
-                        display={"flex"}
-                        justifyContent={"space-between"}
-                      >
-                        <Box display={"flex"}>
-                          <Image
-                            width="45px"
-                            borderRadius="10px"
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnxfMWicZlX7_MYru1I2rpzYtL9AJxEw7fse4xuClp&s"
-                            alt="img"
-                          />
-                          <Text fontSize={"12px"}>ID000221</Text>
-                        </Box>
-
-                        <Text fontSize={"12px"}>8-jun-2021</Text>
-                      </Box>
                     </Box>
                   </Box>
                 </Flex>
