@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const EmpolyeeSchema = new mongoose.Schema(
   {
@@ -28,15 +29,17 @@ const EmpolyeeSchema = new mongoose.Schema(
     },
     phoneNo: { type: String, required: true },
     imageLink: { type: String },
-    location: { type: String, required: true }
+    location: { type: String, required: true },
   },
   {
     timestamps: true,
   }
 );
 
+EmpolyeeSchema.methods.comparePassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
+
 const EmpolyeeModel = mongoose.model("empolyee", EmpolyeeSchema);
 
 module.exports = EmpolyeeModel;
-
-

@@ -22,7 +22,7 @@ router.post("/create", async (req, res) => {
     res.status(500).json({ message: "Error creating employee" });
   }
 });
- 
+
 // Get all employees
 router.get("/all", async (req, res) => {
   try {
@@ -87,4 +87,29 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// Login route
+router.post("/empolyeelogin", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const employee = await EmpolyeeModel.findOne({ email });
+
+    if (!employee) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    const isPasswordValid = await employee.comparePassword(password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    res.status(200).json({ message: "Login successful", employee });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error during login" });
+  }
+});
+
 module.exports = router;
+
+
+
