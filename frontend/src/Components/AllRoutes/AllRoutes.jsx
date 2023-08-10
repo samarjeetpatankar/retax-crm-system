@@ -7,7 +7,7 @@ import AddEmpolyee from "../Empolyee Page/AddEmpolyee";
 import Cases from "../Cases/Cases";
 import Settings from "../Settings/Settings";
 import Calendar1 from "../Calender/calander";
-import { Login } from "../LoginSIgnup/Login";
+import Login from "../LoginSIgnup/Login";
 import { Signup } from "../LoginSIgnup/Signup";
 import LoggedIn from "../AlreadyLoggedIn/LoggedIn";
 
@@ -33,3 +33,5 @@ const AllRoutes = () => {
 };
 
 export { AllRoutes };
+
+

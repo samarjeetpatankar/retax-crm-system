@@ -182,7 +182,7 @@ function Employee() {
                 <Th>Phone no</Th>
                 <Th>Email</Th>
               </Tr>
-            </Thead>
+            </Thead> 
 
             <Tbody>
               {employeeData.map((employee) => {
