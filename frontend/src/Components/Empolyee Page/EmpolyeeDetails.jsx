@@ -139,7 +139,7 @@ function EmployeeDetails() {
                       marginTop: "13px",
                       marginLeft: "15px",
                     }}
-                  > 
+                  >
                     Phone No:{" "}
                   </p>
                   <p style={{ fontSize: "14px", marginTop: "12px" }}>
