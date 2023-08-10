@@ -26,21 +26,23 @@ router.get("/all", async (req, res) => {
   }
 });
 
-// Get employee by ID
 router.get("/:id", async (req, res) => {
-  try {
-    const employee = await EmpolyeeModel.findById(req.params.id);
-    if (employee) {
-      res.status(200).json(employee);
-    } else {
-      res.status(404).json({ message: "Employee not found" });
+    try {
+      const id = req.params.id;
+      console.log("Received ID:", id); // Add this line
+  
+      const employee = await EmpolyeeModel.findById(id);
+      if (employee) {
+        res.status(200).json(employee);
+      } else {
+        res.status(404).json({ message: "Employee not found" });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Error fetching employee" });
     }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error fetching employee" });
-  }
-});
-
+  });
+  
 // Update employee by ID
 router.put("/:id", async (req, res) => {
   try {
@@ -76,5 +78,6 @@ router.delete("/:id", async (req, res) => {
 });
 
 module.exports = router;
+
 
 

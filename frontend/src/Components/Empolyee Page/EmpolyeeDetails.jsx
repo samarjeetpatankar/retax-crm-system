@@ -1,43 +1,47 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 import {
   Box,
-  Button,
   Flex,
   Heading,
   Text,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
   Image,
   Badge,
+  Button,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
 } from "@chakra-ui/react";
-import { useParams, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import axios from "axios";
 import { AiOutlineMail } from "react-icons/ai";
-import { FiMoreHorizontal } from "react-icons/fi";
+import { Link } from "react-router-dom";
+
 import { IoMdAdd } from "react-icons/io";
+import { FiMoreHorizontal } from "react-icons/fi";
 
 function EmployeeDetails() {
   const { emp_id } = useParams();
-  const [empData, setEmpData] = useState({});
+  const [empData, setEmpData] = useState(null);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3003/employeesListData")
+      .get(`http://localhost:8199/${emp_id}`)
       .then((response) => {
-        const data = response.data;
-        const employee = data.find((emp) => emp.id === parseInt(emp_id));
-        setEmpData(employee);
+        setEmpData(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, [emp_id]);
 
+  if (!empData) {
+    return <Box>Loading...</Box>;
+  }
+
   return (
-    <div >
+    <div>
       <Box>
         <Flex
           borderBottomWidth="0.5px"
@@ -65,7 +69,7 @@ function EmployeeDetails() {
           <Box>
             <Flex>
               <img
-                src={empData.img}
+                src={empData.imageLink}
                 alt=""
                 style={{ width: "100px", height: "100px" }}
               />
@@ -88,9 +92,7 @@ function EmployeeDetails() {
                 <br />
                 <Heading fontSize="20px">{empData.name}</Heading>
                 <br />
-                <p style={{ fontSize: "15px" }}>
-                  Position: {empData.positions}
-                </p>
+                <p style={{ fontSize: "15px" }}>Position: {empData.position}</p>
                 <p style={{ fontSize: "15px" }}>
                   Department: {empData.department}
                 </p>
@@ -141,7 +143,7 @@ function EmployeeDetails() {
                     Phone No:{" "}
                   </p>
                   <p style={{ fontSize: "14px", marginTop: "12px" }}>
-                    {empData.phoneNumber}
+                    {empData.phoneNo}
                   </p>
                 </Flex>
               </div>
@@ -183,7 +185,9 @@ function EmployeeDetails() {
             </div>
             <Box mt={"23px"}>
               <Link to="/employee">
-                <Button backgroundColor={"aquamarine"}>Back to Employees Section</Button>
+                <Button backgroundColor={"aquamarine"}>
+                  Back to Employees Section
+                </Button>
               </Link>
             </Box>
           </Box>

@@ -1,140 +1,182 @@
 import React, { useState } from "react";
 import {
   Box,
+  Button,
   FormControl,
   FormLabel,
   Input,
   Select,
-  Button,
-  useToast,
+  Stack,
 } from "@chakra-ui/react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const initialState = {
-  name: "",
-  positions: "",
-  department: "",
-  status: "",
-  phoneNumber: "",
-  email: "",
-  img: "",
-  joinDate: "",
-};
-
-function Form() {
-  const [formData, setFormData] = useState(initialState);
-  const navigate = useNavigate();
-  const toast = useToast();
+const AddEmployee = ({ onSubmit }) => {
+  const navigate = useNavigate()
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    position: "",
+    department: "",
+    status: "",
+    phoneNo: "",
+    imageLink: "",
+    location: "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3003/employeesListData", formData)
-      .then((response) => {
-        //setFormData(initialState);
-        showToast();
-        navigate('/employee')
-      })
-      .catch((error) => {
-        console.error("Error adding employee:", error);
-      });
-  };
+   
 
-  const showToast = () => {
-    toast({
-      title: "Account created.",
-      description: "We've created your account for you.",
-      status: "success",
-      duration: 9000,
-      isClosable: true,
-    });
+    // Making the API call to create the employee
+    try {
+      const response = await fetch("http://localhost:8199/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // Employee created successfully, you might want to handle success here
+        console.log("Employee created successfully");
+        // Optionally, you can clear the form data after successful submission
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+          position: "",
+          department: "",
+          status: "",
+          phoneNo: "",
+          imageLink: "",
+          location: "",
+        });
+        navigate("/employee")
+      } else {
+        // Handle error response here
+        console.error("Error creating employee");
+      }
+    } catch (error) {
+      // Handle any network or API-related errors
+      console.error("An error occurred:", error);
+    }
   };
 
   return (
-    <Box
-      justifyContent="center"
-     
-      boxShadow="rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
-      p="30px"
-      borderRadius="md"
-    >
+    <Box>
       <form onSubmit={handleSubmit}>
-        <FormControl isRequired>
-          <FormLabel>Name</FormLabel>
-          <Input name="name" value={formData.name} onChange={handleChange} />
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel>Image Link</FormLabel>
-          <Input name="img" value={formData.img} onChange={handleChange} />
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel>Position</FormLabel>
-          <Select
-            name="positions"
-            value={formData.positions}
-            onChange={handleChange}
-          >
-            <option value="">Select a position</option>
-            <option value="Head of marketing">Head of marketing</option>
-            <option value="Marketing Consultant">Marketing Consultant</option>
-            <option value="Head of sales">Head of sales</option>
-            <option value="Sales">Sales</option>
-            <option value="Manager">Manager</option>
-            <option value="Lead Generator">Lead Generator</option>
-          </Select>
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel>Department</FormLabel>
-          <Select
-            name="department"
-            value={formData.department}
-            onChange={handleChange}
-          >
-            <option value="">Select a department</option>
-            <option value="Marketing">Marketing</option>
-            <option value="Sales">Sales</option>
-          </Select>
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel>Status</FormLabel>
-          <Select name="status" value={formData.status} onChange={handleChange}>
-            <option value="">Select a status</option>
-            <option value="Active">Active</option>
-            <option value="Inactive">Inactive</option>
-            <option value="In a Meeting">In a Meeting</option>
-          </Select>
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel>Phone Number</FormLabel>
-          <Input
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-          />
-        </FormControl>
-        
-        <FormControl isRequired>
-          <FormLabel>Email</FormLabel>
-          <Input name="email" value={formData.email} onChange={handleChange} />
-        </FormControl>
-        <Button
-          marginTop="20px"
-          type="submit"
-          onClick={() => {
-            showToast();
-          }}
-        >
-          Submit
+        <Stack spacing={4}>
+          <FormControl>
+            <FormLabel>Name</FormLabel>
+            <Input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Email</FormLabel>
+            <Input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Password</FormLabel>
+            <Input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Location</FormLabel>
+            <Input
+              type="text"
+              name="location"
+              value={formData.location}
+              onChange={handleChange}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Position</FormLabel>
+            <Select
+              name="position"
+              value={formData.position}
+              onChange={handleChange}
+            >
+              <option value="">Select Position</option>
+              <option value="Head of marketing">Head of marketing</option>
+              <option value="Marketing Consultant">Marketing Consultant</option>
+              <option value="Head of sales">Head of sales</option>
+              <option value="Sales Manager">Sales Manager</option>
+              <option value="Lead Generator">Lead Generator</option>
+            </Select>
+          </FormControl>
+          <FormControl>
+            <FormLabel>Department</FormLabel>
+            <Select
+              name="department"
+              value={formData.department}
+              onChange={handleChange}
+            >
+              <option value="">Select Department</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Sales">Sales</option>
+            </Select>
+          </FormControl>
+          <FormControl>
+            <FormLabel>Status</FormLabel>
+            <Select
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+            >
+              <option value="">Select Status</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+              <option value="In a Meeting">In a Meeting</option>
+            </Select>
+          </FormControl>
+          <FormControl>
+            <FormLabel>Phone Number</FormLabel>
+            <Input
+              type="text"
+              name="phoneNo"
+              value={formData.phoneNo}
+              onChange={handleChange}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Image Link</FormLabel>
+            <Input
+              type="text"
+              name="imageLink"
+              value={formData.imageLink}
+              onChange={handleChange}
+            />
+          </FormControl>
+        </Stack>
+        <Button type="submit" mt={4} colorScheme="blue">
+          Create Employee
         </Button>
       </form>
     </Box>
   );
-}
+};
 
-export default Form;
+export default AddEmployee;

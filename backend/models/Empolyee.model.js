@@ -28,6 +28,7 @@ const EmpolyeeSchema = new mongoose.Schema(
     },
     phoneNo: { type: String, required: true },
     imageLink: { type: String },
+    location: { type: String, required: true }
   },
   {
     timestamps: true,
