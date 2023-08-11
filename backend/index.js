@@ -15,7 +15,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("base route");
 });
-app.use("/", todoRoute);
+app.use("/", todoRoute); 
 app.use("/", authRoute);
 app.use("/", empolyeeRoute);
 
@@ -34,3 +34,5 @@ async function connectToDatabase() {
 }
 
 connectToDatabase();
+
+

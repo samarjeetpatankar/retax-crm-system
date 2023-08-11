@@ -40,3 +40,17 @@ exports.createTodo = async (req, res) => {
   }
 };
 
+exports.updateTodoStatus = async (req, res) => {
+    try {
+      const { taskId } = req.params;
+      const { status } = req.body;
+  
+      const updatedTodo = await Todo.findByIdAndUpdate(taskId, { status }, { new: true });
+  
+      res.json(updatedTodo);
+    } catch (error) {
+      console.error("Error updating todo status:", error);
+      res.status(500).json({ error: "An error occurred" });
+    }
+  };
+

@@ -11,7 +11,6 @@ const ToDoTask = () => {
   const [customerImageInput, setCustomerImageInput] = useState("");
   const [customerIdInput, setCustomerIdInput] = useState("");
   const [showInputs, setShowInputs] = useState(false);
-
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
@@ -62,6 +61,30 @@ const ToDoTask = () => {
       .catch((error) => console.error("Error adding todo:", error));
   };
 
+  const handleMoveToInProgress = (taskId) => {
+    fetch(`http://localhost:8199/todos/${taskId}/status`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status: "In Progress" }),
+    })
+      .then((response) => response.json())
+      .then((updatedTodo) => {
+        // Update the status of the task in the todos state
+        const updatedTodos = todos.map((todo) => {
+          if (todo.id === updatedTodo.id) {
+            return {
+              ...todo,
+              status: "In Progress",
+            };
+          }
+          return todo;
+        });
+        setTodos(updatedTodos);
+      })
+      .catch((error) => console.error("Error updating status:", error));
+  };
   return (
     <div>
       <Box w="280px" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px">
@@ -156,6 +179,7 @@ const ToDoTask = () => {
               colorScheme="orange"
               height={"23px"}
               width={"170px"}
+              onClick={() => handleMoveToInProgress(todo.id)}
             >
               Move to In Progress
             </Button>
