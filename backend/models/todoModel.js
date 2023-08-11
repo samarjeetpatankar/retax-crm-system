@@ -9,6 +9,7 @@ const todoSchema = new mongoose.Schema({
     customerId: String, // Add this line
     imageSrc: String,
     date: String,
+    
   });
   
 module.exports = mongoose.model('Todo', todoSchema);

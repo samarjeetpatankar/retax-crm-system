@@ -26,7 +26,7 @@ const ToDoTask = () => {
   }, []);
 
   const handleAddClick = () => {
-    setShowInputs(!showInputs); 
+    setShowInputs(!showInputs);
   };
 
   const handleAddTask = () => {
@@ -128,10 +128,10 @@ const ToDoTask = () => {
             boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
           >
             <Box display="flex">
-              <Text fontSize={"14px"} >
-                Task Name:
+              <Text fontSize={"14px"}>Task Name:</Text>
+              <Text ml={"7px"} fontSize={"14px"} fontWeight="bold">
+                {todo.task}
               </Text>
-              <Text ml={"7px"} fontSize={"14px"} fontWeight="bold">{todo.task}</Text>
             </Box>
 
             <Box>
@@ -151,6 +151,14 @@ const ToDoTask = () => {
               </Box>
               <Text fontSize={"14px"}>Added Date : {todo.date}</Text>
             </Box>
+            <Button
+              fontSize={"15px"}
+              colorScheme="orange"
+              height={"23px"}
+              width={"170px"}
+            >
+              Move to In Progress
+            </Button>
           </Box>
         ))}
       </Box>
