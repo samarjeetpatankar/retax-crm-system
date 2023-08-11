@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", authRoute);
-app.use("/", empolyeeRoute);
+app.use("/", empolyeeRoute); 
 
 const port = 8199;
 

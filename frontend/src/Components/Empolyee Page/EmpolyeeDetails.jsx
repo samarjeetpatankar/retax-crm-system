@@ -14,16 +14,53 @@ import {
   Tab,
   TabPanels,
   TabPanel,
+  Input,
 } from "@chakra-ui/react";
 import { AiOutlineMail } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 import { IoMdAdd } from "react-icons/io";
 import { FiMoreHorizontal } from "react-icons/fi";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function EmployeeDetails() {
   const { emp_id } = useParams();
   const [empData, setEmpData] = useState(null);
+
+  const [todos, setTodos] = useState([]);
+  const [inProgress, setInProgress] = useState([]);
+  const [completed, setCompleted] = useState([]);
+  const [taskInput, setTaskInput] = useState("");
+  const [deadlineInput, setDeadlineInput] = useState(new Date());
+
+  const handleAddTodo = () => {
+    if (taskInput && deadlineInput) {
+      const newTodo = {
+        task: taskInput,
+        deadline: deadlineInput.toDateString(),
+        id: `ID${Math.floor(Math.random() * 1000000)}`,
+        date: new Date().toLocaleDateString(),
+        imageSrc:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnxfMWicZlX7_MYru1I2rpzYtL9AJxEw7fse4xuClp&s",
+      };
+      setTodos((prevTodos) => [...prevTodos, newTodo]);
+      setTaskInput("");
+      setDeadlineInput(new Date());
+    }
+  };
+
+  const handleMoveToInProgress = (todo) => {
+    setInProgress((prevInProgress) => [...prevInProgress, todo]);
+    setTodos((prevTodos) => prevTodos.filter((item) => item.id !== todo.id));
+  };
+
+  const handleMoveToCompleted = (todo) => {
+    setCompleted((prevCompleted) => [...prevCompleted, todo]);
+    setInProgress((prevInProgress) =>
+      prevInProgress.filter((item) => item.id !== todo.id)
+    );
+  };
 
   useEffect(() => {
     axios
@@ -227,45 +264,79 @@ function EmployeeDetails() {
                         </Badge>
                         To Do
                       </Text>
-                      <IoMdAdd />
+                      <IoMdAdd
+                        onClick={handleAddTodo}
+                        style={{ cursor: "pointer" }}
+                      />
                     </Box>
-                    <Box
-                      mt={"20px"}
-                      p={"10px"}
-                      boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-                    >
-                      <Box display="flex">
-                        <Text fontSize={"14px"}>
-                          Send lead documents for inceptions
-                        </Text>
-                        <FiMoreHorizontal />
-                      </Box>
-                      <Box>
-                        <Text fontSize={"14px"}>Deadline : 22-Jun-2021</Text>
-                      </Box>
-                      <Box
-                        mt={"10px"}
-                        display={"flex"}
-                        justifyContent={"space-between"}
-                      >
-                        <Box display={"flex"}>
-                          <Image
-                            width="45px"
-                            borderRadius="10px"
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnxfMWicZlX7_MYru1I2rpzYtL9AJxEw7fse4xuClp&s"
-                            alt="img"
-                          />
-                          <Text fontSize={"12px"}>ID000221</Text>
-                        </Box>
 
-                        <Text fontSize={"12px"}>8-jun-2021</Text>
-                      </Box>
+                    <Box p="10px">
+                      <Input
+                        placeholder="Task"
+                        value={taskInput}
+                        onChange={(e) => setTaskInput(e.target.value)}
+                        mb="5px"
+                      />
+                      <DatePicker
+                        selected={deadlineInput}
+                        onChange={(date) => setDeadlineInput(date)}
+                        dateFormat="dd-MMM-yyyy"
+                      />
+                      <Button
+                        onClick={handleAddTodo}
+                        colorScheme="blue"
+                        size="sm"
+                      >
+                        Add Task
+                      </Button>
                     </Box>
+                    {todos.map((todo) => (
+                      <Box
+                        key={todo.id}
+                        mt={"20px"}
+                        p={"10px"}
+                        boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+                      >
+                        <Box display="flex">
+                          <Text fontSize={"14px"}>{todo.task}</Text>
+                          <Button
+                            onClick={() => handleMoveToInProgress(todo)}
+                            colorScheme="yellow"
+                            size="sm"
+                          >
+                            Move to In Progress
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Text fontSize={"14px"}>
+                            Deadline : {todo.deadline}
+                          </Text>
+                        </Box>
+                        <Box
+                          mt={"10px"}
+                          display={"flex"}
+                          justifyContent={"space-between"}
+                        >
+                          <Box display={"flex"}>
+                            <Image
+                              width="45px"
+                              borderRadius="10px"
+                              src={todo.imageSrc}
+                              alt="img"
+                            />
+                            <Text fontSize={"12px"}>{todo.id}</Text>
+                          </Box>
+                          <Text fontSize={"12px"}>{todo.date}</Text>
+                        </Box>
+                      </Box>
+                    ))}
                   </Box>
 
+                  {/* In Progress Section */}
                   <Box
                     w="240px"
                     boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+                    mt="20px"
                   >
                     <Box
                       display="flex"
@@ -281,11 +352,53 @@ function EmployeeDetails() {
                       </Text>
                       <IoMdAdd />
                     </Box>
+                    {inProgress.map((todo) => (
+                      <Box
+                        key={todo.id}
+                        mt={"20px"}
+                        p={"10px"}
+                        boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+                      >
+                        <Box display="flex">
+                          <Text fontSize={"14px"}>{todo.task}</Text>
+                          <Button
+                            onClick={() => handleMoveToCompleted(todo)}
+                            colorScheme="green"
+                            size="sm"
+                          >
+                            Move to Completed
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Text fontSize={"14px"}>
+                            Deadline : {todo.deadline}
+                          </Text>
+                        </Box>
+                        <Box
+                          mt={"10px"}
+                          display={"flex"}
+                          justifyContent={"space-between"}
+                        >
+                          <Box display={"flex"}>
+                            <Image
+                              width="45px"
+                              borderRadius="10px"
+                              src={todo.imageSrc}
+                              alt="img"
+                            />
+                            <Text fontSize={"12px"}>{todo.id}</Text>
+                          </Box>
+                          <Text fontSize={"12px"}>{todo.date}</Text>
+                        </Box>
+                      </Box>
+                    ))}
                   </Box>
 
+                  {/* Completed Section */}
                   <Box
                     w="240px"
                     boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+                    mt="20px"
                   >
                     <Box
                       display="flex"
@@ -301,6 +414,40 @@ function EmployeeDetails() {
                       </Text>
                       <IoMdAdd />
                     </Box>
+                    {completed.map((todo) => (
+                      <Box
+                        key={todo.id}
+                        mt={"20px"}
+                        p={"10px"}
+                        boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+                      >
+                        <Box display="flex">
+                          <Text fontSize={"14px"}>{todo.task}</Text>
+                          <FiMoreHorizontal />
+                        </Box>
+                        <Box>
+                          <Text fontSize={"14px"}>
+                            Deadline : {todo.deadline}
+                          </Text>
+                        </Box>
+                        <Box
+                          mt={"10px"}
+                          display={"flex"}
+                          justifyContent={"space-between"}
+                        >
+                          <Box display={"flex"}>
+                            <Image
+                              width="45px"
+                              borderRadius="10px"
+                              src={todo.imageSrc}
+                              alt="img"
+                            />
+                            <Text fontSize={"12px"}>{todo.id}</Text>
+                          </Box>
+                          <Text fontSize={"12px"}>{todo.date}</Text>
+                        </Box>
+                      </Box>
+                    ))}
                   </Box>
                 </Flex>
               </TabPanel>
