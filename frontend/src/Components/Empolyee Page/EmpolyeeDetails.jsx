@@ -247,9 +247,9 @@ function EmployeeDetails() {
 
             <TabPanels>
               <TabPanel>
-                <Flex w="900px" gap={"10px"}>
+                <Flex w="720px" gap={"10px"}>
                   <Box
-                    w="300px"
+                    w="240px"
                     boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
                   >
                     <Box
@@ -277,20 +277,15 @@ function EmployeeDetails() {
                         onChange={(e) => setTaskInput(e.target.value)}
                         mb="5px"
                       />
-                      <Box>
-                        <label htmlFor="">Deadline : </label>
-                        <DatePicker
-                          selected={deadlineInput}
-                          onChange={(date) => setDeadlineInput(date)}
-                          dateFormat="dd-MMM-yyyy"
-                          
-                        />
-                      </Box>
+                      <DatePicker
+                        selected={deadlineInput}
+                        onChange={(date) => setDeadlineInput(date)}
+                        dateFormat="dd-MMM-yyyy"
+                      />
                       <Button
                         onClick={handleAddTodo}
                         colorScheme="blue"
                         size="sm"
-                        mt={"10px"}
                       >
                         Add Task
                       </Button>
@@ -339,7 +334,7 @@ function EmployeeDetails() {
 
                   {/* In Progress Section */}
                   <Box
-                    w="300px"
+                    w="240px"
                     boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
                     mt="20px"
                   >
@@ -401,7 +396,7 @@ function EmployeeDetails() {
 
                   {/* Completed Section */}
                   <Box
-                    w="300px"
+                    w="240px"
                     boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
                     mt="20px"
                   >
