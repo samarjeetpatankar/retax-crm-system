@@ -15,7 +15,15 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", authRoute);
-app.use("/", empolyeeRoute); 
+app.use("/", empolyeeRoute);
+
+const TodoSchema = new mongoose.Schema({
+  task: String,
+  deadline: Date,
+  status: String,
+});
+
+const Todo = mongoose.model("Todo", TodoSchema);
 
 const port = 8199;
 

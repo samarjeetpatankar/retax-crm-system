@@ -8,9 +8,8 @@ import Cases from "../Cases/Cases";
 import Settings from "../Settings/Settings";
 import Calendar1 from "../Calender/calander";
 import Login from "../LoginSIgnup/Login";
-import { Signup } from "../LoginSIgnup/Signup";
 import LoggedIn from "../AlreadyLoggedIn/LoggedIn";
-import Customer from "../Customer/Customer"
+import Customer from "../Customer/Customer";
 
 const AllRoutes = () => {
   return (
@@ -27,12 +26,10 @@ const AllRoutes = () => {
       <Route path="/settings" element={<Settings />} />
       <Route path="/help" element={<Help />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
+
       <Route path="/loggedin" element={<LoggedIn />} />
     </Routes>
   );
 };
 
 export { AllRoutes };
-
-

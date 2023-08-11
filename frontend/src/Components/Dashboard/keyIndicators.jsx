@@ -1,4 +1,4 @@
-import { Box, GridItem, Text } from "@chakra-ui/react";
+import {  GridItem, Text } from "@chakra-ui/react";
 
 const KeyIndicators = ({ name, value }) => {
   return (
