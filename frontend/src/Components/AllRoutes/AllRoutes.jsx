@@ -10,6 +10,7 @@ import Calendar1 from "../Calender/calander";
 import Login from "../LoginSIgnup/Login";
 import { Signup } from "../LoginSIgnup/Signup";
 import LoggedIn from "../AlreadyLoggedIn/LoggedIn";
+import Customer from "../Customer/Customer"
 
 const AllRoutes = () => {
   return (
@@ -19,7 +20,7 @@ const AllRoutes = () => {
       <Route path={"/employee"} element={<Employee />} />
       <Route path={"/employee/:emp_id"} element={<EmployeeDetails />} />
       <Route path={"/addempolyee"} element={<AddEmpolyee />} />
-      <Route path="/customers" element={<Dashboard />} />
+      <Route path="/customers" element={<Customer />} />
       <Route path="/cases" element={<Cases />} />
       <Route path="/leads" element={<Cases />} />
       <Route path="/requests" element={<Cases />} />
