@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Text,
-  Badge,
-  Button,
-  Input,
-  Image,
- 
-} from "@chakra-ui/react";
+import { Box, Text, Badge, Button, Input, Image } from "@chakra-ui/react";
 import { IoMdAdd } from "react-icons/io";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -15,6 +7,11 @@ import "react-datepicker/dist/react-datepicker.css";
 const ToDoTask = () => {
   const [taskInput, setTaskInput] = useState("");
   const [deadlineInput, setDeadlineInput] = useState(new Date());
+  const [customerInput, setCustomerInput] = useState("");
+  const [customerImageInput, setCustomerImageInput] = useState("");
+  const [customerIdInput, setCustomerIdInput] = useState("");
+  const [showInputs, setShowInputs] = useState(false);
+
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
@@ -28,6 +25,10 @@ const ToDoTask = () => {
       .catch((error) => console.error("Error fetching todos:", error));
   }, []);
 
+  const handleAddClick = () => {
+    setShowInputs(!showInputs); 
+  };
+
   const handleAddTask = () => {
     if (taskInput.trim() === "") {
       return;
@@ -36,8 +37,9 @@ const ToDoTask = () => {
     const newTodo = {
       task: taskInput,
       deadline: deadlineInput.toISOString().split("T")[0],
-      imageSrc:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnxfMWicZlX7_MYru1I2rpzYtL9AJxEw7fse4xuClp&s",
+      customer: customerInput,
+      customerImage: customerImageInput,
+      customerId: customerIdInput,
       date: new Date().toLocaleDateString(),
     };
 
@@ -54,6 +56,7 @@ const ToDoTask = () => {
           setTodos([...todos, data]);
           setTaskInput("");
           setDeadlineInput(new Date());
+          setShowInputs(false); // Hide the input fields after adding
         }
       })
       .catch((error) => console.error("Error adding todo:", error));
@@ -61,7 +64,7 @@ const ToDoTask = () => {
 
   return (
     <div>
-      <Box w="300px" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px">
+      <Box w="280px" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px">
         <Box
           display="flex"
           justifyContent="space-between"
@@ -74,30 +77,49 @@ const ToDoTask = () => {
             </Badge>
             To Do
           </Text>
-          <IoMdAdd style={{ cursor: "pointer" }} />
+          <IoMdAdd style={{ cursor: "pointer" }} onClick={handleAddClick} />
         </Box>
 
-        <Box p="10px">
-          <Input
-            placeholder="Task"
-            value={taskInput}
-            onChange={(e) => setTaskInput(e.target.value)}
-            mb="5px"
-          />
-
-          <Box display="inline-flex" alignItems="center">
-            <label >Deadline : </label>
-            <DatePicker
-              selected={deadlineInput}
-              onChange={(date) => setDeadlineInput(date)}
-              dateFormat="dd-MMM-yyyy"
+        {showInputs && (
+          <Box p="10px">
+            <Input
+              placeholder="Task"
+              value={taskInput}
+              onChange={(e) => setTaskInput(e.target.value)}
+              mb="5px"
             />
+            <Input
+              placeholder="Customer Image URL"
+              value={customerImageInput}
+              onChange={(e) => setCustomerImageInput(e.target.value)}
+              mb="5px"
+            />
+            <Input
+              placeholder="Customer ID"
+              value={customerIdInput}
+              onChange={(e) => setCustomerIdInput(e.target.value)}
+              mb="5px"
+            />
+            <Input
+              placeholder="Customer Name"
+              value={customerInput}
+              onChange={(e) => setCustomerInput(e.target.value)}
+              mb="5px"
+            />
+            <Box display="inline-flex" alignItems="center">
+              <label>Deadline : </label>
+              <DatePicker
+                selected={deadlineInput}
+                onChange={(date) => setDeadlineInput(date)}
+                dateFormat="dd-MMM-yyyy"
+              />
+            </Box>
+            <Button colorScheme="blue" size="sm" onClick={handleAddTask}>
+              Add Task
+            </Button>
           </Box>
+        )}
 
-          <Button colorScheme="blue" size="sm" onClick={handleAddTask}>
-            Add Task
-          </Button>
-        </Box>
         {todos.map((todo) => (
           <Box
             key={todo.id}
@@ -106,22 +128,28 @@ const ToDoTask = () => {
             boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
           >
             <Box display="flex">
-              <Text fontSize={"14px"}>{todo.task}</Text>
+              <Text fontSize={"14px"} >
+                Task Name:
+              </Text>
+              <Text ml={"7px"} fontSize={"14px"} fontWeight="bold">{todo.task}</Text>
             </Box>
+
             <Box>
               <Text fontSize={"14px"}>Deadline : {todo.deadline}</Text>
+              <Text fontSize={"14px"}>Customer : {todo.customer}</Text>
+              <Text fontSize={"14px"}>Customer ID: {todo.customerId}</Text>
             </Box>
             <Box mt={"10px"} display={"flex"} justifyContent={"space-between"}>
               <Box display={"flex"}>
                 <Image
                   width="45px"
                   borderRadius="10px"
-                  src={todo.imageSrc}
+                  src={todo.customerImage}
                   alt="img"
                 />
-                <Text fontSize={"12px"}>{todo.id}</Text>
+                <Text fontSize={"14px"}>{todo.id}</Text>
               </Box>
-              <Text fontSize={"12px"}>{todo.date}</Text>
+              <Text fontSize={"14px"}>Added Date : {todo.date}</Text>
             </Box>
           </Box>
         ))}

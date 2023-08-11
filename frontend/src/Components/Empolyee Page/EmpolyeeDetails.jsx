@@ -180,7 +180,7 @@ function EmployeeDetails() {
                   rel="noopener noreferrer"
                   style={{ textDecoration: "none", color: "black" }}
                 >
-                  <Text ml={2}>Send to {empData.email}</Text>
+                  <Text ml={2}>Send to {empData.name}</Text>
                 </a>
               </Button>
             </div>
