@@ -1,42 +1,12 @@
 import React from "react";
-import { Box, Grid, IconButton, useDisclosure } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { Box } from "@chakra-ui/react";
 import "./App.css";
-import Sidebar from "./Components/Sidebar/Sidebar";
-import { AllRoutes } from "./Components/AllRoutes/AllRoutes";
-import Topbar from "./Components/Topbar/Topbar";
-import Footer from "./Components/Footer/Footer";
-
+import AllFiles from "./Components/AllFiles/AllFiles";
 function App() {
-  const { isOpen, onToggle } = useDisclosure();
-
-  const handleSidebarToggle = () => {
-    onToggle();
-  };
-
   return (
     <Box className="App">
-      <Box mb={2}>
-        <Topbar />
-      </Box>
-      <Grid templateColumns={{ base: "1fr", md: "250px 1fr" }} gap={6}>
-        <Box display={{ base: isOpen ? "block" : "none", md: "block" }}>
-          <Sidebar />
-        </Box>
-
-        <Box display={{ base: "block", md: "none" }}>
-          <IconButton
-            icon={<HamburgerIcon />}
-            variant="ghost"
-            onClick={handleSidebarToggle}
-          />
-        </Box>
-
-        <Box display={{ base: "block", md: "block" }}>
-          <AllRoutes />
-        </Box>
-      </Grid>
-      <Footer />
+   <AllFiles />
+     
     </Box>
   );
 }

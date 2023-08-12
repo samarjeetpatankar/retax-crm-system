@@ -1,63 +1,87 @@
 import React, { useState } from "react";
 import {
-  Box,
+  VStack,
+  Input,
   Button,
   FormControl,
   FormLabel,
-  Input,
-  VStack,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 
-const Login = ({ onLogin }) => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleRegularUserLogin = async () => {
-    const response = await fetch("http://localhost:8199/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
+  const handleLogin = async () => {
+    try {
+      // Send a POST request to the login API
+      const response = await fetch("http://localhost:8199/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (response.ok) {
       const data = await response.json();
-      console.log("Regular User Login successful", data);
-      onLogin(); // Call the onLogin function to update the isLoggedIn state
-    } else {
-      const errorData = await response.json();
-      console.error("Regular User Login error", errorData);
+
+      if (response.ok) {
+        // Login successful
+        setIsLoggedIn(true);
+        setErrorMessage("");
+      } else {
+        // Login failed, show error message
+        setIsLoggedIn(false);
+        setErrorMessage(data.message || "Login failed");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      setErrorMessage("An error occurred during login");
     }
   };
 
   return (
-    <Box p={4}>
-      <VStack spacing={4} align="stretch">
-        <FormControl id="email">
-          <FormLabel>Email address</FormLabel>
-          <Input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </FormControl>
-        <FormControl id="password">
-          <FormLabel>Password</FormLabel>
-          <Input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </FormControl>
-        <Button colorScheme="teal" onClick={handleRegularUserLogin}>
-          Login as Admin
-        </Button>
-      </VStack>
-    </Box>
+    <VStack spacing={4} p={4}>
+      <FormControl>
+        <FormLabel>Email</FormLabel>
+        <Input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </FormControl>
+
+      <FormControl>
+        <FormLabel>Password</FormLabel>
+        <Input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </FormControl>
+
+      <Button colorScheme="blue" onClick={handleLogin}>
+        Login
+      </Button>
+
+      {errorMessage && (
+        <Alert status="error">
+          <AlertIcon />
+          {errorMessage}
+        </Alert>
+      )}
+
+      {isLoggedIn && (
+        <Alert status="success">
+          <AlertIcon />
+          Login successful!
+        </Alert>
+      )}
+    </VStack>
   );
 };
 
 export default Login;
-
-
