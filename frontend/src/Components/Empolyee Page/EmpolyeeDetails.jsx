@@ -12,6 +12,7 @@ import {
   Tab,
   TabPanels,
   TabPanel,
+  VStack,
 } from "@chakra-ui/react";
 import { AiOutlineMail } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -21,6 +22,27 @@ import ToDoTask from "./ToDoTask";
 function EmployeeDetails() {
   const { emp_id } = useParams();
   const [empData, setEmpData] = useState(null);
+  const [customers, setCustomers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const customersPerPage = 5;
+  const indexOfLastCustomer = currentPage * customersPerPage;
+  const indexOfFirstCustomer = indexOfLastCustomer - customersPerPage;
+  const currentCustomers = customers.slice(
+    indexOfFirstCustomer,
+    indexOfLastCustomer
+  );
+
+  useEffect(() => {
+    fetch("http://localhost:8199/customers")
+      .then((response) => response.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setCustomers(data);
+        }
+      })
+      .catch((error) => console.error("Error fetching customers:", error));
+  }, []);
+
   useEffect(() => {
     axios
       .get(`http://localhost:8199/${emp_id}`)
@@ -209,6 +231,44 @@ function EmployeeDetails() {
                 <Flex w="900" gap={"10px"}>
                   <ToDoTask />
                 </Flex>
+              </TabPanel>
+              <TabPanel>
+                <Tabs>
+                  <TabPanels>
+                    <TabPanel>
+                      {currentCustomers.map((customer, index) => (
+                        <Box
+                          key={index}
+                          borderWidth="1px"
+                          borderRadius="lg"
+                          p="4"
+                          mb="4"
+                          boxShadow="md"
+                        >
+                          <VStack align="left" spacing="1">
+                            <Text fontSize="lg" fontWeight="semibold">
+                              Name: {customer.name}
+                            </Text>
+                            <Text>Email: {customer.email}</Text>
+                            <Text>Phone No.: {customer.phoneNo}</Text>
+                          </VStack>
+                        </Box>
+                      ))}
+                      <Button
+                        disabled={currentPage === 1}
+                        onClick={() => setCurrentPage(currentPage - 1)}
+                      >
+                        Previous
+                      </Button>
+                      <Button
+                        disabled={indexOfLastCustomer >= customers.length}
+                        onClick={() => setCurrentPage(currentPage + 1)}
+                      >
+                        Next
+                      </Button>
+                    </TabPanel>
+                  </TabPanels>
+                </Tabs>
               </TabPanel>
             </TabPanels>
           </Tabs>
