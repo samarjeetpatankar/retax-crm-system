@@ -8,7 +8,6 @@ import Cases from "../Cases/Cases";
 import Settings from "../Settings/Settings";
 import Calendar1 from "../Calender/calander";
 import Login from "../LoginSIgnup/Login";
-import LoggedIn from "../AlreadyLoggedIn/LoggedIn";
 import Customer from "../Customer/Customer";
 
 const AllRoutes = () => {
@@ -26,8 +25,6 @@ const AllRoutes = () => {
       <Route path="/settings" element={<Settings />} />
       <Route path="/help" element={<Help />} />
       <Route path="/login" element={<Login />} />
-
-      <Route path="/loggedin" element={<LoggedIn />} />
     </Routes>
   );
 };

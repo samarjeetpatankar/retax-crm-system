@@ -74,7 +74,7 @@ const ToDoTask = () => {
           setTodos([...todos, data]);
           setTaskInput("");
           setDeadlineInput(new Date());
-          setShowInputs(false); // Hide the input fields after adding
+          setShowInputs(false); 
         }
       })
       .catch((error) => console.error("Error adding todo:", error));
@@ -196,3 +196,5 @@ const ToDoTask = () => {
 };
 
 export default ToDoTask;
+
+

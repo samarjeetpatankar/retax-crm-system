@@ -7,8 +7,8 @@ import {
   Input,
   VStack,
 } from "@chakra-ui/react";
- 
-const Login = () => {
+
+const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,32 +24,10 @@ const Login = () => {
     if (response.ok) {
       const data = await response.json();
       console.log("Regular User Login successful", data);
-      // Handle the token and user data for regular user
+      onLogin(); // Call the onLogin function to update the isLoggedIn state
     } else {
       const errorData = await response.json();
       console.error("Regular User Login error", errorData);
-      // Handle login error for regular user
-    }
-  };
-
-  const handleEmployeeLogin = async () => {
-    const response = await fetch("http://localhost:8199/empolyeelogin", {
-      // Fix the typo here: "/empolyeelogin" to "/employeelogin"
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log("Employee Login successful", data);
-      // Handle the token and user data for employee
-    } else {
-      const errorData = await response.json();
-      console.error("Employee Login error", errorData);
-      // Handle login error for employee
     }
   };
 
@@ -72,10 +50,6 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </FormControl>
-
-        <Button colorScheme="blue" onClick={handleEmployeeLogin}>
-          Login as Employee
-        </Button>
         <Button colorScheme="teal" onClick={handleRegularUserLogin}>
           Login as Admin
         </Button>
@@ -85,3 +59,5 @@ const Login = () => {
 };
 
 export default Login;
+
+
