@@ -61,6 +61,9 @@ const ToDoTask = () => {
       .catch((error) => console.error("Error adding todo:", error));
   };
 
+  // Inside ToDoTask component
+  
+
   return (
     <div>
       <Box w="280px" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px">
@@ -150,14 +153,15 @@ const ToDoTask = () => {
               </Box>
               <Text fontSize={"14px"}>Added Date : {todo.date}</Text>
             </Box>
-            <Button
+            {/* <Button
               fontSize={"15px"}
               colorScheme="orange"
               height={"23px"}
               width={"170px"}
+              
             >
               Move to In Progress
-            </Button>
+            </Button> */}
           </Box>
         ))}
       </Box>
