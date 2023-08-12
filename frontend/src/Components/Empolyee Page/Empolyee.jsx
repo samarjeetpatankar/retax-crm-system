@@ -75,8 +75,8 @@ function Employee() {
       })
       .catch((error) => {
         console.log(error);
-      });
-  }, []);
+      }); 
+  }, []);  
 
   console.log("User Role:", userRole) ;
 

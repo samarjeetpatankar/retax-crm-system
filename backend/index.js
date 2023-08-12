@@ -5,6 +5,7 @@ require("dotenv").config();
 const authRoute = require("./routes/authRoutes");
 const empolyeeRoute = require("./routes/empolyeeRoute");
 const todoRoute = require("./routes/todoRoutes");
+const CustomerRoute = require("./routes/CustomerRoute");
 const mongoose = require("mongoose");
 const port = 8199;
 
@@ -15,7 +16,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("base route");
 });
-app.use("/", todoRoute); 
+
+app.use("/", CustomerRoute);
+app.use("/", todoRoute);
 app.use("/", authRoute);
 app.use("/", empolyeeRoute);
 
@@ -35,6 +38,3 @@ async function connectToDatabase() {
 }
 
 connectToDatabase();
-
-
- 

@@ -3,7 +3,7 @@ const EmpolyeeModel = require("../models/Empolyee.model");
 const bcrypt = require("bcrypt");
 
 const router = express.Router();
-
+ 
 // Create a new employee
 router.post("/create", async (req, res) => {
   try {
