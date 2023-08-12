@@ -39,7 +39,6 @@ const Sidebar = () => {
       flexDirection="column"
       p={4}
       borderRadius="md"
-     
       height="100%"
       width="250px"
       bg="rgba(0, 0, 0, 0.04)"
@@ -91,7 +90,7 @@ const Sidebar = () => {
         <Divider />
       </Box>
 
-      <Link to="/logout">
+      <Link>
         <HStack spacing={2} mt={6} _hover={{ textDecoration: "underline" }}>
           <FaSignOutAlt size={20} />
           <Box>Logout</Box>
