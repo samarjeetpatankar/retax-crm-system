@@ -13,6 +13,25 @@ const ToDoTask = () => {
   const [showInputs, setShowInputs] = useState(false);
   const [todos, setTodos] = useState([]);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const tasksPerPage = 3;
+
+  const indexOfLastTask = currentPage * tasksPerPage;
+  const indexOfFirstTask = indexOfLastTask - tasksPerPage;
+  const currentTasks = todos.slice(indexOfFirstTask, indexOfLastTask);
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (indexOfLastTask < todos.length) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
   useEffect(() => {
     fetch("http://localhost:8199/todos")
       .then((response) => response.json())
@@ -60,9 +79,6 @@ const ToDoTask = () => {
       })
       .catch((error) => console.error("Error adding todo:", error));
   };
-
-  // Inside ToDoTask component
-  
 
   return (
     <div>
@@ -122,7 +138,7 @@ const ToDoTask = () => {
           </Box>
         )}
 
-        {todos.map((todo) => (
+        {currentTasks.map((todo) => (
           <Box
             key={todo.id}
             mt={"20px"}
@@ -153,18 +169,28 @@ const ToDoTask = () => {
               </Box>
               <Text fontSize={"14px"}>Added Date : {todo.date}</Text>
             </Box>
-            {/* <Button
-              fontSize={"15px"}
-              colorScheme="orange"
-              height={"23px"}
-              width={"170px"}
-              
-            >
-              Move to In Progress
-            </Button> */}
           </Box>
         ))}
       </Box>
+
+      <div style={{ display: "flex", justifyContent: "space-between" , marginTop:"5px" }}>
+        <Button
+        colorScheme='teal' variant='outline'
+          disabled={currentPage === 1}
+          onClick={handlePreviousPage}
+          style={{ order: 1 }}
+        >
+          Previous
+        </Button>
+        <Button
+        colorScheme='teal' variant='outline'
+          disabled={indexOfLastTask >= todos.length}
+          onClick={handleNextPage}
+          style={{ order: 2 }}
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 };

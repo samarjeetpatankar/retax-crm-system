@@ -208,9 +208,6 @@ function EmployeeDetails() {
               <TabPanel>
                 <Flex w="900" gap={"10px"}>
                   <ToDoTask />
-                  {/* In Progress Section */}
-                  {/* <InProgressTasks /> */}
-                  {/* Completed Section */}
                 </Flex>
               </TabPanel>
             </TabPanels>
