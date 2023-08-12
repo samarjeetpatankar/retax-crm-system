@@ -8,8 +8,9 @@ import {
   Alert,
   AlertIcon,
 } from "@chakra-ui/react";
+import { Navigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -32,6 +33,7 @@ const Login = () => {
         // Login successful
         setIsLoggedIn(true);
         setErrorMessage("");
+        navigate("/");
       } else {
         // Login failed, show error message
         setIsLoggedIn(false);
@@ -53,7 +55,6 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
       </FormControl>
-
       <FormControl>
         <FormLabel>Password</FormLabel>
         <Input
@@ -62,24 +63,17 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </FormControl>
-
       <Button colorScheme="blue" onClick={handleLogin}>
         Login
       </Button>
-
       {errorMessage && (
         <Alert status="error">
           <AlertIcon />
           {errorMessage}
         </Alert>
       )}
-
-      {isLoggedIn && (
-        <Alert status="success">
-          <AlertIcon />
-          Login successful!
-        </Alert>
-      )}
+      {isLoggedIn && <Navigate to="/" />}{" "}
+     
     </VStack>
   );
 };
