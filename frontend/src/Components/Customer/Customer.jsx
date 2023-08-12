@@ -20,6 +20,7 @@ import {
   FormLabel,
   Input,
   Select,
+  ButtonGroup
 } from "@chakra-ui/react";
 import axios from "axios";
 
@@ -39,6 +40,25 @@ const Customer = () => {
   const [deletingCustomerId, setDeletingCustomerId] = useState(null);
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
     useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const customersPerPage = 7;
+  const [currentDisplayedCustomers, setCurrentDisplayedCustomers] = useState(
+    []
+  );
+
+  useEffect(() => {
+    const filteredCustomers = searchResults.slice(
+      (currentPage - 1) * customersPerPage,
+      currentPage * customersPerPage
+    );
+    setCurrentDisplayedCustomers(filteredCustomers);
+  }, [currentPage, searchResults]);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   useEffect(() => {
     axios
@@ -50,6 +70,17 @@ const Customer = () => {
         console.error("Error fetching customer data:", error);
       });
   }, []);
+
+  useEffect(() => {
+    const filteredCustomers = customers.filter(
+      (customer) =>
+        customer.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        customer.customerId.includes(searchQuery) ||
+        customer.phoneNo.includes(searchQuery) ||
+        customer.email.includes(searchQuery)
+    );
+    setSearchResults(filteredCustomers);
+  }, [searchQuery, customers]);
 
   const handleModalOpen = () => {
     setIsModalOpen(true);
@@ -127,10 +158,19 @@ const Customer = () => {
         console.error("Error deleting customer:", error);
       });
   };
-
   return (
     <Box p="4">
-      <Button onClick={handleModalOpen}>Add a Customer</Button>
+      <Input
+        width={"500px"}
+        type="text"
+        placeholder="Search by name, customer ID, phone no, or email"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      <Button mb={"10px"} ml={"700px"} onClick={handleModalOpen}>
+        Add a Customer
+      </Button>
+
       <Table variant="unstyled">
         <Thead>
           <Tr>
@@ -147,7 +187,7 @@ const Customer = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {customers.map((customer) => (
+          {currentDisplayedCustomers.map((customer) => (
             <Tr key={customer._id}>
               <Td>
                 <Checkbox />
@@ -178,32 +218,50 @@ const Customer = () => {
               </Td>
             </Tr>
           ))}
-          <Modal
-            isOpen={isDeleteConfirmationOpen}
-            onClose={() => setIsDeleteConfirmationOpen(false)}
-          >
-            <ModalOverlay />
-            <ModalContent>
-              <ModalHeader>Confirm Deletion</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody>
-                Are you sure you want to delete this customer?
-              </ModalBody>
-              <ModalFooter>
-                <Button colorScheme="red" onClick={confirmDelete}>
-                  Delete
-                </Button>
-                <Button
-                  variant="ghost"
-                  onClick={() => setIsDeleteConfirmationOpen(false)}
-                >
-                  Cancel
-                </Button>
-              </ModalFooter>
-            </ModalContent>
-          </Modal>
         </Tbody>
+        <Modal
+          isOpen={isDeleteConfirmationOpen}
+          onClose={() => setIsDeleteConfirmationOpen(false)}
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Confirm Deletion</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              Are you sure you want to delete this customer?
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme="red" onClick={confirmDelete}>
+                Delete
+              </Button>
+              <Button
+                variant="ghost"
+                onClick={() => setIsDeleteConfirmationOpen(false)}
+              >
+                Cancel
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
       </Table>
+
+      <Box mt="4">
+        <ButtonGroup>
+          <Button
+            isDisabled={currentPage === 1}
+            onClick={() => handlePageChange(currentPage - 1)}
+          >
+            Previous
+          </Button>
+          <Button>{currentPage}</Button>
+          <Button
+            isDisabled={currentPage * customersPerPage >= searchResults.length}
+            onClick={() => handlePageChange(currentPage + 1)}
+          >
+            Next
+          </Button>
+        </ButtonGroup>
+      </Box>
 
       <Modal isOpen={isModalOpen} onClose={handleModalClose}>
         <ModalOverlay />
