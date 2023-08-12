@@ -17,7 +17,7 @@ import { AiOutlineMail } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import ToDoTask from "./ToDoTask";
-import InProgressTasks from "./InProgressTasks";
+// import InProgressTasks from "./InProgressTasks";
 
 function EmployeeDetails() {
   const { emp_id } = useParams();
@@ -210,7 +210,7 @@ function EmployeeDetails() {
                 <Flex w="900" gap={"10px"}>
                   <ToDoTask />
                   {/* In Progress Section */}
-                  <InProgressTasks />
+                  {/* <InProgressTasks /> */}
                   {/* Completed Section */}
                 </Flex>
               </TabPanel>
