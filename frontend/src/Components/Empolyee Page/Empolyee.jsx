@@ -27,7 +27,6 @@ import {
   ModalCloseButton,
   FormControl,
   FormLabel,
-  
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { SearchIcon } from "@chakra-ui/icons";
@@ -48,6 +47,18 @@ function Employee() {
     email: "",
   });
   const [deletingEmployeeId, setDeletingEmployeeId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const employeesPerPage = 5;
+
+  const indexOfLastEmployee = currentPage * employeesPerPage;
+  const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
+  const currentEmployees = employeeData.slice(
+    indexOfFirstEmployee,
+    indexOfLastEmployee
+  );
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
 
   const handleSort = (event) => {
     let status = event.target.value;
@@ -269,7 +280,7 @@ function Employee() {
             </Thead>
 
             <Tbody>
-              {employeeData.map((employee) => {
+              {currentEmployees.map((employee) => {
                 return (
                   <Tr
                     key={employee._id}
@@ -353,6 +364,21 @@ function Employee() {
             </Tbody>
           </Table>
         </TableContainer>
+        <Flex justifyContent="center" mt="4">
+          <Button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </Button>
+          <Button
+            onClick={() => handlePageChange(currentPage + 1)}
+            ml="2"
+            disabled={currentEmployees.length < employeesPerPage}
+          >
+            Next
+          </Button>
+        </Flex>
         <Modal
           isOpen={editingEmployeeId !== null}
           onClose={() => setEditingEmployeeId(null)}
@@ -457,4 +483,3 @@ function Employee() {
 }
 
 export default Employee;
-
