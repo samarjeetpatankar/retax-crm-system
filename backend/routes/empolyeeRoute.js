@@ -13,7 +13,7 @@ router.post("/create", async (req, res) => {
     const newEmpolyee = new EmpolyeeModel({
       ...otherFields,
       password: hashedPassword,
-    });
+    }); 
 
     await newEmpolyee.save();
     res.status(201).json({ message: "Employee created successfully" });

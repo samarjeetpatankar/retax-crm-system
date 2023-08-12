@@ -18,6 +18,16 @@ import {
   TableContainer,
   InputGroup,
   InputLeftElement,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  FormControl,
+  FormLabel,
+  
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { SearchIcon } from "@chakra-ui/icons";
@@ -28,6 +38,16 @@ function Employee() {
   const [employeeData, setEmployeeData] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [userRole, setUserRole] = useState("");
+  const [editingEmployeeId, setEditingEmployeeId] = useState(null);
+  const [editEmployeeData, setEditEmployeeData] = useState({
+    name: "",
+    position: "",
+    department: "",
+    status: "",
+    phoneNo: "",
+    email: "",
+  });
+  const [deletingEmployeeId, setDeletingEmployeeId] = useState(null);
 
   const handleSort = (event) => {
     let status = event.target.value;
@@ -66,7 +86,7 @@ function Employee() {
   useEffect(() => {
     const fetchedUserRole = "admin";
     setUserRole(fetchedUserRole);
-    
+
     axios
       .get("http://localhost:8199/all")
       .then((response) => {
@@ -75,10 +95,10 @@ function Employee() {
       })
       .catch((error) => {
         console.log(error);
-      }); 
-  }, []);  
+      });
+  }, []);
 
-  console.log("User Role:", userRole) ;
+  console.log("User Role:", userRole);
 
   useEffect(() => {
     const filteredList = sort.filter(
@@ -95,12 +115,67 @@ function Employee() {
     setEmployeeData(filteredList);
   }, [searchText, sort]);
 
+  const handleEditEmployee = (employee) => {
+    setEditingEmployeeId(employee._id);
+    setEditEmployeeData({
+      name: employee.name,
+      position: employee.position,
+      department: employee.department,
+      status: employee.status,
+      phoneNo: employee.phoneNo,
+      email: employee.email,
+    });
+  };
+
+  const handleEditInputChange = (event) => {
+    const { name, value } = event.target;
+    setEditEmployeeData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleEditFormSubmit = (event) => {
+    event.preventDefault();
+    axios
+      .put(`http://localhost:8199/${editingEmployeeId}`, editEmployeeData)
+      .then((response) => {
+        const updatedEmployeeData = employeeData.map((employee) =>
+          employee._id === editingEmployeeId ? response.data : employee
+        );
+        setEmployeeData(updatedEmployeeData);
+        setEditingEmployeeId(null);
+      })
+      .catch((error) => {
+        console.error("Error updating employee:", error);
+      });
+  };
+
+  const handleDeleteEmployee = (employeeId) => {
+    setDeletingEmployeeId(employeeId);
+  };
+
+  const confirmDeleteEmployee = () => {
+    axios
+      .delete(`http://localhost:8199/${deletingEmployeeId}`)
+      .then(() => {
+        const updatedEmployeeData = employeeData.filter(
+          (employee) => employee._id !== deletingEmployeeId
+        );
+        setEmployeeData(updatedEmployeeData);
+        setDeletingEmployeeId(null);
+      })
+      .catch((error) => {
+        console.error("Error deleting employee:", error);
+      });
+  };
+
   return (
     <Box style={{ margin: "10px", padding: "10px" }}>
       <Flex style={{ margin: "30px" }}>
         <Heading>Employees</Heading>
         <Spacer />
-        
+
         {userRole === "admin" && (
           <Button
             as={Link}
@@ -254,15 +329,132 @@ function Employee() {
                         {employee.email}
                       </Link>
                     </Td>
+                    <Td>
+                      <Button
+                        colorScheme="blue"
+                        size="sm"
+                        onClick={() => handleEditEmployee(employee)}
+                      >
+                        Edit
+                      </Button>
+                    </Td>
+                    <Td>
+                      <Button
+                        colorScheme="red"
+                        size="sm"
+                        onClick={() => handleDeleteEmployee(employee._id)}
+                      >
+                        Delete
+                      </Button>
+                    </Td>
                   </Tr>
                 );
               })}
             </Tbody>
           </Table>
         </TableContainer>
+        <Modal
+          isOpen={editingEmployeeId !== null}
+          onClose={() => setEditingEmployeeId(null)}
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Edit Employee</ModalHeader>
+            <ModalCloseButton />
+            <form onSubmit={handleEditFormSubmit}>
+              <ModalBody>
+                <FormControl>
+                  <FormLabel>Name</FormLabel>
+                  <Input
+                    type="text"
+                    name="name"
+                    value={editEmployeeData.name}
+                    onChange={handleEditInputChange}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Position</FormLabel>
+                  <Input
+                    type="text"
+                    name="position"
+                    value={editEmployeeData.position}
+                    onChange={handleEditInputChange}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Department</FormLabel>
+                  <Input
+                    type="text"
+                    name="department"
+                    value={editEmployeeData.department}
+                    onChange={handleEditInputChange}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Status</FormLabel>
+                  <Input
+                    type="text"
+                    name="status"
+                    value={editEmployeeData.status}
+                    onChange={handleEditInputChange}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Phone No</FormLabel>
+                  <Input
+                    type="text"
+                    name="phoneNo"
+                    value={editEmployeeData.phoneNo}
+                    onChange={handleEditInputChange}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Email</FormLabel>
+                  <Input
+                    type="email"
+                    name="email"
+                    value={editEmployeeData.email}
+                    onChange={handleEditInputChange}
+                  />
+                </FormControl>
+              </ModalBody>
+              <ModalFooter>
+                <Button type="submit" colorScheme="blue" mr={3}>
+                  Save
+                </Button>
+                <Button onClick={() => setEditingEmployeeId(null)}>
+                  Cancel
+                </Button>
+              </ModalFooter>
+            </form>
+          </ModalContent>
+        </Modal>
+
+        <Modal
+          isOpen={deletingEmployeeId !== null}
+          onClose={() => setDeletingEmployeeId(null)}
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Confirm Deletion</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              Are you sure you want to delete this employee?
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme="red" onClick={confirmDeleteEmployee}>
+                Delete
+              </Button>
+              <Button onClick={() => setDeletingEmployeeId(null)}>
+                Cancel
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
       </Box>
     </Box>
   );
 }
 
 export default Employee;
+

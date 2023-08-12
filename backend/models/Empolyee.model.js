@@ -35,7 +35,7 @@ const EmpolyeeSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-
+ 
 EmpolyeeSchema.methods.comparePassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
