@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Heading,
-  Input,
-  Divider,
-  HStack,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Heading, Input, Divider, HStack, VStack } from "@chakra-ui/react";
 import {
   FaCalendar,
   FaUserFriends,
@@ -18,21 +11,17 @@ import {
   FaQuestionCircle,
   FaSignOutAlt,
 } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const [searchText, setSearchText] = useState("");
-  const history = useNavigate();
 
   const handleSearchChange = (event) => {
     setSearchText(event.target.value);
   };
 
   const handleLogout = () => {
-    // Here, you would typically perform the logout actions
-    // Clear user authentication state, tokens, etc.
-    // For demonstration purposes, we'll just navigate to the login page
-    history("/login");
+    localStorage.removeItem("authToken");
   };
 
   const filteredLinks = [
@@ -104,13 +93,10 @@ const Sidebar = () => {
         <Divider />
       </Box>
 
-      {/* Logout button */}
-      <Link to="/" onClick={handleLogout}>
-        <HStack spacing={2} mt={6} _hover={{ textDecoration: "underline" }}>
-          <FaSignOutAlt size={20} />
-          <Box>Logout</Box>
-        </HStack>
-      </Link>
+      <HStack spacing={2} mt={6} _hover={{ textDecoration: "underline" }}>
+        <FaSignOutAlt size={20} />
+        <Box onClick={handleLogout}>Logout</Box>
+      </HStack>
     </Box>
   );
 };
