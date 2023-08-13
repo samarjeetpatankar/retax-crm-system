@@ -31,4 +31,3 @@ const AllRoutes = () => {
 
 export { AllRoutes };
 
-
