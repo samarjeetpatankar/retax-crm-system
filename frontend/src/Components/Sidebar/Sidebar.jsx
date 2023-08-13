@@ -1,4 +1,12 @@
-import { Box, Heading, Input, Divider, HStack, VStack } from "@chakra-ui/react";
+import React, { useState } from "react";
+import {
+  Box,
+  Heading,
+  Input,
+  Divider,
+  HStack,
+  VStack,
+} from "@chakra-ui/react";
 import {
   FaCalendar,
   FaUserFriends,
@@ -10,19 +18,25 @@ import {
   FaQuestionCircle,
   FaSignOutAlt,
 } from "react-icons/fa";
-import { RxDashboard } from "react-icons/rx";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const [searchText, setSearchText] = useState("");
+  const history = useNavigate();
 
   const handleSearchChange = (event) => {
     setSearchText(event.target.value);
   };
 
+  const handleLogout = () => {
+    // Here, you would typically perform the logout actions
+    // Clear user authentication state, tokens, etc.
+    // For demonstration purposes, we'll just navigate to the login page
+    history("/login");
+  };
+
   const filteredLinks = [
-    { path: "/", label: "Dashboard", icon: RxDashboard },
+    { path: "/", label: "Dashboard", icon: FaCalendar },
     { path: "/calendar", label: "Calendar", icon: FaCalendar },
     { path: "/employee", label: "Employees", icon: FaUserFriends },
     { path: "/customers", label: "Customers", icon: FaUser },
@@ -90,7 +104,8 @@ const Sidebar = () => {
         <Divider />
       </Box>
 
-      <Link>
+      {/* Logout button */}
+      <Link to="/" onClick={handleLogout}>
         <HStack spacing={2} mt={6} _hover={{ textDecoration: "underline" }}>
           <FaSignOutAlt size={20} />
           <Box>Logout</Box>

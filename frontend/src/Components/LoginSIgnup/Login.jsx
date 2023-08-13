@@ -33,6 +33,8 @@ const Login = ({ handleLogin }) => {
         // Login successful
         setIsLoggedIn(true);
         setErrorMessage("");
+        // Store the token in localStorage
+        localStorage.setItem("authToken", data.token); // Replace "authToken" with your actual token key
         handleLogin(); // Call the handleLogin function
       } else {
         // Login failed, show error message
