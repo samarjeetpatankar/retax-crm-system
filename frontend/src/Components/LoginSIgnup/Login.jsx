@@ -10,13 +10,13 @@ import {
 } from "@chakra-ui/react";
 import { Navigate } from "react-router-dom";
 
-const Login = ({ navigate }) => {
+const Login = ({ handleLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleLogin = async () => {
+  const handleLoginClick = async () => {
     try {
       // Send a POST request to the login API
       const response = await fetch("http://localhost:8199/login", {
@@ -33,7 +33,7 @@ const Login = ({ navigate }) => {
         // Login successful
         setIsLoggedIn(true);
         setErrorMessage("");
-        navigate("/");
+        handleLogin(); // Call the handleLogin function
       } else {
         // Login failed, show error message
         setIsLoggedIn(false);
@@ -63,7 +63,7 @@ const Login = ({ navigate }) => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </FormControl>
-      <Button colorScheme="blue" onClick={handleLogin}>
+      <Button colorScheme="blue" onClick={handleLoginClick}>
         Login
       </Button>
       {errorMessage && (
@@ -72,11 +72,9 @@ const Login = ({ navigate }) => {
           {errorMessage}
         </Alert>
       )}
-      {isLoggedIn && <Navigate to="/" />}{" "}
-     
+      {isLoggedIn && <Navigate to="/" />}
     </VStack>
   );
 };
 
 export default Login;
-

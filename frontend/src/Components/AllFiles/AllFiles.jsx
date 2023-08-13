@@ -5,7 +5,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import { AllRoutes } from "../AllRoutes/AllRoutes";
 import Topbar from "../Topbar/Topbar";
 import Footer from "../Footer/Footer";
-const AllFiles = () => {
+const AllFiles = ({ handleLogout }) => {
   const { isOpen, onToggle } = useDisclosure();
 
   const handleSidebarToggle = () => {
@@ -13,8 +13,8 @@ const AllFiles = () => {
   };
   return (
     <div>
-      <Box mb={2}> 
-        <Topbar />
+      <Box mb={2}>
+        <Topbar handleLogout={handleLogout} />
       </Box>
       <Grid templateColumns={{ base: "1fr", md: "250px 1fr" }} gap={6}>
         <Box display={{ base: isOpen ? "block" : "none", md: "block" }}>
@@ -39,4 +39,3 @@ const AllFiles = () => {
 };
 
 export default AllFiles;
- 
