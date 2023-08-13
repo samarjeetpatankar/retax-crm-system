@@ -13,7 +13,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { ArrowBackIcon, BellIcon } from "@chakra-ui/icons";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Topbar = () => {
   const navigate = useNavigate();
@@ -65,21 +65,18 @@ const Topbar = () => {
           overflow="hidden"
           bg="white"
         >
-          <Link to="/login">
-            <Box
-              p={1}
-              textAlign="center"
-              bg="gray.200"
-              color="gray.600"
-              fontSize="sm"
-              fontWeight="semibold"
-              textTransform="uppercase"
-              transition="all 0.3s"
-              _hover={{ bg: "gray.300", cursor: "pointer" }}
-            >
-              Sign in
-            </Box>
-          </Link>
+          <Box
+            p={1}
+            textAlign="center"
+            bg="gray.200"
+            color="gray.600"
+            fontSize="sm"
+            fontWeight="semibold"
+            transition="all 0.3s"
+            _hover={{ bg: "gray.300", cursor: "pointer" }}
+          >
+            Welcome admin
+          </Box>
         </Box>
       </Box>
       <Modal isOpen={showNotification} onClose={handleCloseNotification}>
