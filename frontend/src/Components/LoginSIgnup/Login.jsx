@@ -48,13 +48,14 @@ const Login = ({ handleLogin }) => {
   };
 
   return (
-    <VStack spacing={4} p={4}>
+    <VStack width={"700px"} spacing={6} p={8} borderWidth={1} borderRadius="lg" boxShadow="lg">
       <FormControl>
         <FormLabel>Email</FormLabel>
         <Input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          variant="filled"
         />
       </FormControl>
       <FormControl>
@@ -63,9 +64,10 @@ const Login = ({ handleLogin }) => {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          variant="filled"
         />
       </FormControl>
-      <Button colorScheme="blue" onClick={handleLoginClick}>
+      <Button colorScheme="blue" size="lg" onClick={handleLoginClick}>
         Login
       </Button>
       {errorMessage && (
