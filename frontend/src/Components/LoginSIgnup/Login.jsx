@@ -48,7 +48,16 @@ const Login = ({ handleLogin }) => {
   };
 
   return (
-    <VStack width={"700px"} spacing={6} p={8} borderWidth={1} borderRadius="lg" boxShadow="lg">
+    <VStack
+      margin={"auto"}
+      mt={"50px"}
+      width={"700px"}
+      spacing={6}
+      p={8}
+      borderWidth={1}
+      borderRadius="lg"
+      boxShadow="lg"
+    >
       <FormControl>
         <FormLabel>Email</FormLabel>
         <Input
