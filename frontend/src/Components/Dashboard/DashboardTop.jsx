@@ -1,10 +1,18 @@
 import React from "react";
 import { AddIcon } from "@chakra-ui/icons";
-import { Button, ButtonGroup, Box, IconButton, Flex, Spacer, Heading } from "@chakra-ui/react";
+import {
+  Button,
+  ButtonGroup,
+  Box,
+  IconButton,
+  Flex,
+  Spacer,
+  Heading,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 const DashboardTop = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <Box p={4} bg="white" boxShadow="md" borderRadius="md">
       <Flex alignItems="center">
@@ -14,7 +22,9 @@ const DashboardTop = () => {
         <Spacer />
         <ButtonGroup isAttached variant="outline">
           <IconButton icon={<AddIcon />} colorScheme="blue" />
-          <Button onClick={()=>navigate('/addempolyee')} colorScheme="blue">Add an employee</Button>
+          <Button onClick={() => navigate("/addempolyee")} colorScheme="blue">
+            Add an employee
+          </Button>
         </ButtonGroup>
       </Flex>
     </Box>

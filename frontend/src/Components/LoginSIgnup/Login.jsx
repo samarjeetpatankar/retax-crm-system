@@ -9,6 +9,7 @@ import {
   AlertIcon,
 } from "@chakra-ui/react";
 import { Navigate } from "react-router-dom";
+import API_BASE_URL from "../ApiConfig/apiConfig";
 
 const Login = ({ handleLogin }) => {
   const [email, setEmail] = useState("");
@@ -19,7 +20,7 @@ const Login = ({ handleLogin }) => {
   const handleLoginClick = async () => {
     try {
       // Send a POST request to the login API
-      const response = await fetch("http://localhost:8199/login", {
+      const response = await fetch(`${API_BASE_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,3 +92,5 @@ const Login = ({ handleLogin }) => {
 };
 
 export default Login;
+
+

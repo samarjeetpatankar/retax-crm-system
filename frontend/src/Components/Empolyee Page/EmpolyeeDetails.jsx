@@ -18,6 +18,7 @@ import { AiOutlineMail } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import ToDoTask from "./ToDoTask";
+import API_BASE_URL from "../ApiConfig/apiConfig";
 
 function EmployeeDetails() {
   const { emp_id } = useParams();
@@ -33,7 +34,7 @@ function EmployeeDetails() {
   );
 
   useEffect(() => {
-    fetch("http://localhost:8199/customers")
+    fetch(`${API_BASE_URL}/customers`)
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -45,7 +46,7 @@ function EmployeeDetails() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8199/${emp_id}`)
+      .get(`${API_BASE_URL}/${emp_id}`)
       .then((response) => {
         setEmpData(response.data);
       })

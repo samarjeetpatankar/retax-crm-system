@@ -12,7 +12,7 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
+  ModalHeader, 
   ModalFooter,
   ModalBody,
   ModalCloseButton,
@@ -23,6 +23,7 @@ import {
   ButtonGroup
 } from "@chakra-ui/react";
 import axios from "axios";
+import API_BASE_URL from "../ApiConfig/apiConfig";
 
 const Customer = () => {
   const [customers, setCustomers] = useState([]);
@@ -62,7 +63,7 @@ const Customer = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8199/customers")
+      .get(`${API_BASE_URL}/customers`)
       .then((response) => {
         setCustomers(response.data);
       })
@@ -104,7 +105,7 @@ const Customer = () => {
       // If editing an existing customer
       axios
         .put(
-          `http://localhost:8199/customers/${editingCustomerId}`,
+          `${API_BASE_URL}/customers/${editingCustomerId}`,
           customerData
         )
         .then((response) => {
@@ -121,7 +122,7 @@ const Customer = () => {
     } else {
       // If adding a new customer
       axios
-        .post("http://localhost:8199/customers", customerData)
+        .post(`${API_BASE_URL}/customers`, customerData)
         .then((response) => {
           setCustomers([...customers, response.data]);
           setIsModalOpen(false);
@@ -145,7 +146,7 @@ const Customer = () => {
 
   const confirmDelete = () => {
     axios
-      .delete(`http://localhost:8199/customers/${deletingCustomerId}`)
+      .delete(`${API_BASE_URL}/customers/${deletingCustomerId}`)
       .then(() => {
         const updatedCustomers = customers.filter(
           (c) => c._id !== deletingCustomerId

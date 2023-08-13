@@ -4,11 +4,12 @@ import {
   Button,
   FormControl, 
   FormLabel,
-  Input,
+  Input, 
   Select,
   Stack, 
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "../ApiConfig/apiConfig";
 
 const AddEmployee = ({ onSubmit }) => {
   const navigate = useNavigate()
@@ -38,7 +39,7 @@ const AddEmployee = ({ onSubmit }) => {
 
     // Making the API call to create the employee
     try {
-      const response = await fetch("http://localhost:8199/create", {
+      const response = await fetch(`${API_BASE_URL}/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

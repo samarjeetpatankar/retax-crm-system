@@ -31,6 +31,7 @@ import {
 import { Link } from "react-router-dom";
 import { SearchIcon } from "@chakra-ui/icons";
 import { MdOutlineAddCircle } from "react-icons/md";
+import API_BASE_URL from "../ApiConfig/apiConfig";
 
 function Employee() {
   const [sort, setSort] = useState([]);
@@ -99,7 +100,7 @@ function Employee() {
     setUserRole(fetchedUserRole);
 
     axios
-      .get("http://localhost:8199/all")
+      .get(`${API_BASE_URL}/all`)
       .then((response) => {
         setSort(response.data);
         setEmployeeData(response.data);
@@ -149,7 +150,7 @@ function Employee() {
   const handleEditFormSubmit = (event) => {
     event.preventDefault();
     axios
-      .put(`http://localhost:8199/${editingEmployeeId}`, editEmployeeData)
+      .put(`${API_BASE_URL}/${editingEmployeeId}`, editEmployeeData)
       .then((response) => {
         const updatedEmployeeData = employeeData.map((employee) =>
           employee._id === editingEmployeeId ? response.data : employee
@@ -168,7 +169,7 @@ function Employee() {
 
   const confirmDeleteEmployee = () => {
     axios
-      .delete(`http://localhost:8199/${deletingEmployeeId}`)
+      .delete(`${API_BASE_URL}/${deletingEmployeeId}`)
       .then(() => {
         const updatedEmployeeData = employeeData.filter(
           (employee) => employee._id !== deletingEmployeeId
@@ -483,3 +484,4 @@ function Employee() {
 }
 
 export default Employee;
+    
