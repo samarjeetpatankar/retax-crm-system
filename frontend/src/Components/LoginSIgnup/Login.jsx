@@ -7,6 +7,7 @@ import {
   FormLabel,
   Alert,
   AlertIcon,
+  Box,
 } from "@chakra-ui/react";
 import { Navigate } from "react-router-dom";
 import API_BASE_URL from "../ApiConfig/apiConfig";
@@ -49,48 +50,55 @@ const Login = ({ handleLogin }) => {
   };
 
   return (
-    <VStack
-      margin={"auto"}
-      mt={"50px"}
-      width={"700px"}
-      spacing={6}
-      p={8}
-      borderWidth={1}
-      borderRadius="lg"
-      boxShadow="lg"
+    <Box
+      className="gradient"
+      pt={["10px", "20px"]}
+      height="100vh"
+      backgroundColor="gray.100"
     >
-      <FormControl>
-        <FormLabel>Email</FormLabel>
-        <Input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          variant="filled"
-        />
-      </FormControl>
-      <FormControl>
-        <FormLabel>Password</FormLabel>
-        <Input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          variant="filled"
-        />
-      </FormControl>
-      <Button colorScheme="blue" size="lg" onClick={handleLoginClick}>
-        Login
-      </Button>
-      {errorMessage && (
-        <Alert status="error">
-          <AlertIcon />
-          {errorMessage}
-        </Alert>
-      )}
-      {isLoggedIn && <Navigate to="/" />}
-    </VStack>
+      <VStack
+        margin={"auto"}
+        mt={["20px", "50px"]}
+        width={["90%", "700px"]}
+        spacing={6}
+        p={8}
+        borderWidth={3}
+        borderRadius="lg"
+        boxShadow="lg"
+      >
+        <FormControl>
+          <FormLabel fontSize={["18px", "21px"]}>Email</FormLabel>
+          <Input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            variant="filled"
+            border={"1px solid black"}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel fontSize={["18px", "21px"]}>Password</FormLabel>
+          <Input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            variant="filled"
+            border={"1px solid black"}
+          />
+        </FormControl>
+        <Button colorScheme="blue" size="lg" onClick={handleLoginClick}>
+          Login
+        </Button>
+        {errorMessage && (
+          <Alert status="error">
+            <AlertIcon />
+            {errorMessage}
+          </Alert>
+        )}
+        {isLoggedIn && <Navigate to="/" />}
+      </VStack>
+    </Box>
   );
 };
 
 export default Login;
-
-
