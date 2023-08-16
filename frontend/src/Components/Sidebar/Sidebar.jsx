@@ -95,7 +95,9 @@ const Sidebar = () => {
 
       <HStack spacing={2} mt={6} _hover={{ textDecoration: "underline" }}>
         <FaSignOutAlt size={20} />
-        <Box onClick={handleLogout}>Logout</Box>
+        <Box onClick={handleLogout} cursor="pointer">
+          Logout
+        </Box>
       </HStack>
     </Box>
   );
